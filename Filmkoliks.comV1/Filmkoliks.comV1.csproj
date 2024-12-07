@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C918748F-9849-4BB9-A532-E83A63BD6B25}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Filmkoliks.comV1</RootNamespace>
+    <AssemblyName>Filmkoliks.comV1</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FilmListesi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FilmListesi.Designer.cs">
+      <DependentUpon>FilmListesi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAcilis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAcilis.Designer.cs">
+      <DependentUpon>FrmAcilis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAnaform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAnaform.Designer.cs">
+      <DependentUpon>FrmAnaform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBiletDetay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBiletDetay.Designer.cs">
+      <DependentUpon>FrmBiletDetay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBiletOlustur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBiletOlustur.Designer.cs">
+      <DependentUpon>FrmBiletOlustur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBiletSorgula.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBiletSorgula.Designer.cs">
+      <DependentUpon>FrmBiletSorgula.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFilmDetay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFilmDetay.Designer.cs">
+      <DependentUpon>FrmFilmDetay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFilmKayit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFilmKayit.Designer.cs">
+      <DependentUpon>FrmFilmKayit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFilmListe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFilmListe.Designer.cs">
+      <DependentUpon>FrmFilmListe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmOyuncuKayit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmOyuncuKayit.Designer.cs">
+      <DependentUpon>FrmOyuncuKayit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmOyuncuListesi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmOyuncuListesi.Designer.cs">
+      <DependentUpon>FrmOyuncuListesi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSalonAtama.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSalonAtama.Designer.cs">
+      <DependentUpon>FrmSalonAtama.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSalonKayit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSalonKayit.Designer.cs">
+      <DependentUpon>FrmSalonKayit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmYonetmenKayıt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmYonetmenKayıt.Designer.cs">
+      <DependentUpon>FrmYonetmenKayıt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmYonetmenListesi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmYonetmenListesi.Designer.cs">
+      <DependentUpon>FrmYonetmenListesi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="oListeAraci.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="oListeAraci.Designer.cs">
+      <DependentUpon>oListeAraci.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OyuncuListesi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OyuncuListesi.Designer.cs">
+      <DependentUpon>OyuncuListesi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="salonListesi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="salonListesi.Designer.cs">
+      <DependentUpon>salonListesi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="yListeAraci.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="yListeAraci.Designer.cs">
+      <DependentUpon>yListeAraci.cs</DependentUpon>
+    </Compile>
+    <Compile Include="YonetmenListesi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="YonetmenListesi.Designer.cs">
+      <DependentUpon>YonetmenListesi.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FilmListesi.resx">
+      <DependentUpon>FilmListesi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAcilis.resx">
+      <DependentUpon>FrmAcilis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAnaform.resx">
+      <DependentUpon>FrmAnaform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBiletDetay.resx">
+      <DependentUpon>FrmBiletDetay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBiletOlustur.resx">
+      <DependentUpon>FrmBiletOlustur.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBiletSorgula.resx">
+      <DependentUpon>FrmBiletSorgula.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFilmDetay.resx">
+      <DependentUpon>FrmFilmDetay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFilmKayit.resx">
+      <DependentUpon>FrmFilmKayit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFilmListe.resx">
+      <DependentUpon>FrmFilmListe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmOyuncuKayit.resx">
+      <DependentUpon>FrmOyuncuKayit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmOyuncuListesi.resx">
+      <DependentUpon>FrmOyuncuListesi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSalonAtama.resx">
+      <DependentUpon>FrmSalonAtama.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSalonKayit.resx">
+      <DependentUpon>FrmSalonKayit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmYonetmenKayıt.resx">
+      <DependentUpon>FrmYonetmenKayıt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmYonetmenListesi.resx">
+      <DependentUpon>FrmYonetmenListesi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="oListeAraci.resx">
+      <DependentUpon>oListeAraci.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OyuncuListesi.resx">
+      <DependentUpon>OyuncuListesi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="salonListesi.resx">
+      <DependentUpon>salonListesi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="yListeAraci.resx">
+      <DependentUpon>yListeAraci.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YonetmenListesi.resx">
+      <DependentUpon>YonetmenListesi.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sari.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kirmizi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mavi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{fe28aa69-554a-47e7-a922-6efde54c923c}</Project>
+      <Name>DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EntityLayer\EntityLayer.csproj">
+      <Project>{6eee1f23-e6e6-44b1-828d-5e89a85bea9c}</Project>
+      <Name>EntityLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogicLayer\LogicLayer.csproj">
+      <Project>{b74c516a-1882-4da7-96a6-5dedd6948be2}</Project>
+      <Name>LogicLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\movie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cinema-screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\barcode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cinema.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kırmızı.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ticket %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\noGorsel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FİLMKOLİKS GÖRSELLER %287%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\turkey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\united-states.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\closed-caption.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\magnifying-glass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kadin.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\erkek.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FİLMKOLİKS GÖRSELLER %282%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sinema.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sariPlus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plusDark.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
