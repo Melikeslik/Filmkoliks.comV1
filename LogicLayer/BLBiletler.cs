@@ -39,5 +39,11 @@ namespace LogicLayer
         {
             return true;
         }
+
+
+        public static EntityBiletler BiletSorgula(string biletKod)
+        {
+            return DALBiletler.BiletSorgula(biletKod);
+        }
     }
 }

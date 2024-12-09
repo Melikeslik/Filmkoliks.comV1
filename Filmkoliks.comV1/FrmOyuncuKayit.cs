@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicLayer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,9 +18,6 @@ namespace Filmkoliks.comV1
         {
             InitializeComponent();
         }
-
-        //connectionstring
-        SqlConnection baglanti = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=FilmkoliksDB;Integrated Security=True");
 
         public string resimYolu = " ";
         public string cinsiyet = "0";
@@ -81,7 +79,7 @@ namespace Filmkoliks.comV1
             lblKarakter.Text = "300";
             cinsiyet = "0";
             bYas = "00";
-            pBResim.ImageLocation = @"C:\Users\mnurk\Desktop\NOGÖRSEL.png";
+            pBResim.Image = (System.Drawing.Image)(Properties.Resources.noGorsel);
             txtAd.Focus();
         }
 
@@ -121,15 +119,21 @@ namespace Filmkoliks.comV1
             {
                 string adSoyad = txtAd.Text.ToString().ToUpper() + " " + txtSoyad.Text.ToString().ToUpper();
                 //ToUpper() komudumuz var olan karakterlerin tümünü büyük harfe çevirir.
-                baglanti.Open();
-                SqlCommand kayit = new SqlCommand("insert into Tbl_Oyuncular (ADSOYAD, CINSIYET,YAS,BIYOGRAFI,RESIM) VALUES (@p1,@p2,@p3,@p4,@p5)", baglanti);
-                kayit.Parameters.AddWithValue("@p1", adSoyad);
-                kayit.Parameters.AddWithValue("@p2", cinsiyet);
-                kayit.Parameters.AddWithValue("@p3", bYas);
-                kayit.Parameters.AddWithValue("@p4", txtBiyografi.Text.ToString().ToUpper());
-                kayit.Parameters.AddWithValue("@p5", resimYolu);
-                kayit.ExecuteNonQuery();
-                baglanti.Close();
+                //baglanti.Open();
+                //SqlCommand kayit = new SqlCommand("insert into Tbl_Oyuncular (ADSOYAD, CINSIYET,YAS,BIYOGRAFI,RESIM) VALUES (@p1,@p2,@p3,@p4,@p5)", baglanti);
+                //kayit.Parameters.AddWithValue("@p1", adSoyad);
+                //kayit.Parameters.AddWithValue("@p2", cinsiyet);
+                //kayit.Parameters.AddWithValue("@p3", bYas);
+                //kayit.Parameters.AddWithValue("@p4", txtBiyografi.Text.ToString().ToUpper());
+                //kayit.Parameters.AddWithValue("@p5", resimYolu);
+                //kayit.ExecuteNonQuery();
+                //baglanti.Close();
+
+                string biyografi = txtBiyografi.Text.ToString().ToUpper(); // Biyografi bilgisini alıyoruz
+
+                // İş mantığı katmanındaki metodu çağır
+                BLOyuncular.AddOyuncu(adSoyad, cinsiyet, bYas, biyografi, resimYolu);
+
                 MessageBox.Show("OYUNCU KAYIT İŞLEMİ BAŞARILI BİR ŞEKİLDE GERÇEKLEŞTİRİLDİ.");
                 //ARAÇ TEMİZLEME KOMUTU YAZMAMIZ GEREKECEK.
                 aracTemizle();
@@ -140,9 +144,5 @@ namespace Filmkoliks.comV1
             }
         }
 
-        private void FrmOyuncuKayit_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

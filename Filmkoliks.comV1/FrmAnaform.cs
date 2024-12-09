@@ -17,26 +17,10 @@ namespace Filmkoliks.comV1
             InitializeComponent();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-  
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             //this.Close();
             Application.Exit();
-        }
-
-        private void FrmAnaform_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -44,21 +28,6 @@ namespace Filmkoliks.comV1
             FrmYonetmenKayıt frm = new FrmYonetmenKayıt();
             frm.ShowDialog(); //show
             
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void panel5_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel8_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void button3_Click_1(object sender, EventArgs e)
@@ -71,11 +40,6 @@ namespace Filmkoliks.comV1
         {
             FrmOyuncuKayit frm = new FrmOyuncuKayit();
             frm.ShowDialog();
-        }
-
-        private void panel15_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void button5_Click(object sender, EventArgs e)

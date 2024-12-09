@@ -71,7 +71,6 @@
             this.lblKoltukSayisi.Size = new System.Drawing.Size(77, 31);
             this.lblKoltukSayisi.TabIndex = 3;
             this.lblKoltukSayisi.Text = "label2";
-            this.lblKoltukSayisi.Click += new System.EventHandler(this.lblKoltukSayisi_Click);
             // 
             // label1
             // 
@@ -102,7 +101,6 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox1
             // 
@@ -125,7 +123,6 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "salonListesi";
             this.Size = new System.Drawing.Size(350, 83);
-            this.Load += new System.EventHandler(this.salonListesi_Load);
             this.MouseLeave += new System.EventHandler(this.ayril);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gel);
             this.flowLayoutPanel1.ResumeLayout(false);

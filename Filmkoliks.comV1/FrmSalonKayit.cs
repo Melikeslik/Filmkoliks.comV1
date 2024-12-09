@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Xml.Schema;
+using DataAccessLayer;
+
 namespace Filmkoliks.comV1
 {
     public partial class FrmSalonKayit : Form
@@ -17,8 +19,7 @@ namespace Filmkoliks.comV1
         {
             InitializeComponent();
         }
-        //connectionstring
-        SqlConnection baglanti = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=FilmkoliksDB;Integrated Security=True");
+        
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -33,12 +34,12 @@ namespace Filmkoliks.comV1
         {
             if (txtSalonAdi.Text != "" && cbKoltukSayisi.Text != "")
             {
-                baglanti.Open();
-                SqlCommand kaydet = new SqlCommand("insert into Tbl_Salonlar (SALONADI, KOLTUKSAYISI) VALUES (@P1, @P2)" , baglanti);
+                Baglanti.baglanti.Open();
+                SqlCommand kaydet = new SqlCommand("insert into Tbl_Salonlar (SALONADI, KOLTUKSAYISI) VALUES (@P1, @P2)" , Baglanti.baglanti);
                 kaydet.Parameters.AddWithValue("@p1", txtSalonAdi.Text);
                 kaydet.Parameters.AddWithValue("@p2", cbKoltukSayisi.Text);
                 kaydet.ExecuteNonQuery();
-                baglanti.Close();
+                Baglanti.baglanti.Close();
                 MessageBox.Show("SALON KAYDETME İŞLEMİ GERÇEKLEŞTİRİLDİ");
                 txtSalonAdi.Text = "";
                 cbKoltukSayisi.Text = "";
@@ -91,8 +92,8 @@ namespace Filmkoliks.comV1
         void listeGetir()
         {
             panelSalon.Controls.Clear();
-            baglanti.Open();
-            SqlCommand komut = new SqlCommand("select * from Tbl_Salonlar ORDER BY SALONADI ASC", baglanti);
+            Baglanti.baglanti.Open();
+            SqlCommand komut = new SqlCommand("select * from Tbl_Salonlar ORDER BY SALONADI ASC", Baglanti.baglanti);
             SqlDataReader oku = komut.ExecuteReader();
             while (oku.Read())
             {
@@ -101,7 +102,7 @@ namespace Filmkoliks.comV1
                 arac.lblKoltukSayisi.Text = oku["KOLTUKSAYISI"].ToString();
                 panelSalon.Controls.Add(arac);
             }
-            baglanti.Close();
+            Baglanti.baglanti.Close();
         }
     }
 }

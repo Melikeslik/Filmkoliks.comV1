@@ -81,5 +81,50 @@ namespace DataAccessLayer
             komutGuncelle.Parameters.AddWithValue("@salonadi", guncelle.SalonAdi);
             return komutGuncelle.ExecuteNonQuery() > 0;
         }
+
+        public static EntityBiletler BiletSorgula(string biletKod)
+        {
+            string sorgu = "SELECT * FROM Tbl_Biletler WHERE BKOD=@biletKod";
+            SqlCommand komut = new SqlCommand(sorgu, baglanti);
+            komut.Parameters.AddWithValue("@biletKod", biletKod);
+
+            EntityBiletler bilet = null;
+
+            try
+            {
+                if (komut.Connection.State != ConnectionState.Open)
+                {
+                    komut.Connection.Open();
+                }
+                SqlDataReader oku = komut.ExecuteReader();
+
+                if (oku.Read())
+                {
+                    bilet = new EntityBiletler
+                    {
+                        Id = Convert.ToInt16(oku["ID"]),
+                        BKod = oku["BKOD"].ToString(),
+                        AdSoyad = oku["ADSOYAD"].ToString(),
+                        TelNo = oku["TELNO"].ToString(),
+                        KoltukNo = oku["KOLTUKNO"].ToString(),
+                        FilmAdi = oku["FILMADI"].ToString(),
+                        Tarih = oku["TARIH"].ToString(),
+                        Saat = oku["SAAT"].ToString(),
+                        Salon = oku["SALON"].ToString(),
+                        Tur = oku["TUR"].ToString(),
+                        IslemSaati = oku["ISLEMSAATI"].ToString()
+                    };
+                }
+            }
+            finally
+            {
+                if (komut.Connection.State == ConnectionState.Open)
+                {
+                    komut.Connection.Close();
+                }
+            }
+
+            return bilet;
+        }
     }
 }

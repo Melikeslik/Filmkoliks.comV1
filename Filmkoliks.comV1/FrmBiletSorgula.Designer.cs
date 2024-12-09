@@ -83,12 +83,11 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(119, 85);
+            this.label2.Location = new System.Drawing.Point(131, 77);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(196, 31);
+            this.label2.Size = new System.Drawing.Size(208, 31);
             this.label2.TabIndex = 2;
-            this.label2.Text = "BİLET NUMARASI";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.label2.Text = "BİLET NUMARASI :";
             // 
             // txtBiletNo
             // 
@@ -118,7 +117,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox1.Location = new System.Drawing.Point(315, 85);
+            this.pictureBox1.Location = new System.Drawing.Point(315, 77);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(303, 35);
             this.pictureBox1.TabIndex = 5;

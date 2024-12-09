@@ -95,7 +95,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(956, 40);
             this.panel1.TabIndex = 1;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // button1
             // 
@@ -143,7 +142,6 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(250, 704);
             this.panel5.TabIndex = 5;
-            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
             // panel6
             // 
@@ -176,7 +174,6 @@
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(250, 704);
             this.panel8.TabIndex = 7;
-            this.panel8.Paint += new System.Windows.Forms.PaintEventHandler(this.panel8_Paint);
             // 
             // panel11
             // 
@@ -233,7 +230,6 @@
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(250, 556);
             this.panel15.TabIndex = 7;
-            this.panel15.Paint += new System.Windows.Forms.PaintEventHandler(this.panel15_Paint);
             // 
             // panel21
             // 
@@ -452,7 +448,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(250, 74);
             this.panel4.TabIndex = 4;
-            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // button2
             // 
@@ -520,7 +515,6 @@
             this.Name = "FrmAnaform";
             this.Text = "FrmAnaform";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.FrmAnaform_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

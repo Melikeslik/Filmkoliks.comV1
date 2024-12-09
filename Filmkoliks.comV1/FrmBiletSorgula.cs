@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Diagnostics.Eventing.Reader;
 using DataAccessLayer;
+using EntityLayer;
+using LogicLayer;
 
 namespace Filmkoliks.comV1
 {
@@ -20,63 +22,38 @@ namespace Filmkoliks.comV1
             InitializeComponent();
         }
 
-        //connectionstring
-        SqlConnection baglanti = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=FilmkoliksDB;Integrated Security=True");
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnSorgula_Click(object sender, EventArgs e)
         {
             if (txtBiletNo.Text != "")
             {
-                baglanti.Open();
-                SqlCommand komut = new SqlCommand("select  * from Tbl_Biletler WHERE BKOD=@P1", baglanti);
-                komut.Parameters.AddWithValue("@p1", txtBiletNo.Text.ToString());
-                SqlDataReader oku = komut.ExecuteReader();
-                if (oku.Read())
-                {
+                // Bilet kodunu alıyoruz
+                string biletKod = txtBiletNo.Text.ToString();
 
+                // BL katmanından bilet verisini alıyoruz
+                EntityBiletler bilet = BLBiletler.BiletSorgula(biletKod);
+
+                // Bilet bulunduysa detayları gösteriyoruz
+                if (bilet != null)
+                {
                     FrmBiletDetay frm = new FrmBiletDetay();
-                    frm.biletNo = txtBiletNo.Text.ToString();
+                    frm.biletNo = bilet.BKod; // Detay formunda bilet numarasını göstermek
                     txtBiletNo.Text = "";
                     frm.ShowDialog();
                 }
-
                 else
                 {
                     MessageBox.Show("KAYITLI BİLET BULUNAMADI!");
-                    baglanti.Close();
                 }
-                baglanti.Close();
-            }    
-
+            }
             else
             {
                 MessageBox.Show("LÜTFEN BİLET NUMARASI GİRİNİZ!");
             }
-
-            
-
-
-
-
-
-
-
-
-           
         }
     }
 }

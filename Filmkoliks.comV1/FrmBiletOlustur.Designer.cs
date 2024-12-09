@@ -131,7 +131,6 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "BİLET NUMARASI";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // txtBarkod
             // 
@@ -287,7 +286,6 @@
             this.panelSEANS.Size = new System.Drawing.Size(286, 56);
             this.panelSEANS.TabIndex = 0;
             this.panelSEANS.WrapContents = false;
-            this.panelSEANS.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSEANS_Paint);
             // 
             // groupBox7
             // 

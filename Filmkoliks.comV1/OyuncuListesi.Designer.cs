@@ -48,9 +48,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(797, 84);
+            this.button1.Location = new System.Drawing.Point(797, 92);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(69, 47);
+            this.button1.Size = new System.Drawing.Size(69, 39);
             this.button1.TabIndex = 18;
             this.button1.Text = "SİL";
             this.button1.UseVisualStyleBackColor = false;
@@ -88,9 +88,9 @@
             this.btnResimYukle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResimYukle.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnResimYukle.ForeColor = System.Drawing.Color.White;
-            this.btnResimYukle.Location = new System.Drawing.Point(622, 84);
+            this.btnResimYukle.Location = new System.Drawing.Point(606, 92);
             this.btnResimYukle.Name = "btnResimYukle";
-            this.btnResimYukle.Size = new System.Drawing.Size(169, 47);
+            this.btnResimYukle.Size = new System.Drawing.Size(185, 39);
             this.btnResimYukle.TabIndex = 14;
             this.btnResimYukle.Text = "DETAY";
             this.btnResimYukle.UseVisualStyleBackColor = false;
@@ -106,7 +106,6 @@
             this.lblAdSoyad.Size = new System.Drawing.Size(73, 31);
             this.lblAdSoyad.TabIndex = 11;
             this.lblAdSoyad.Text = "label1";
-            this.lblAdSoyad.Click += new System.EventHandler(this.lblAdSoyad_Click);
             // 
             // panel1
             // 
@@ -122,7 +121,7 @@
             this.pbCinsiyet.Image = global::Filmkoliks.comV1.Properties.Resources.erkek;
             this.pbCinsiyet.Location = new System.Drawing.Point(121, 6);
             this.pbCinsiyet.Name = "pbCinsiyet";
-            this.pbCinsiyet.Size = new System.Drawing.Size(43, 43);
+            this.pbCinsiyet.Size = new System.Drawing.Size(31, 41);
             this.pbCinsiyet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbCinsiyet.TabIndex = 17;
             this.pbCinsiyet.TabStop = false;

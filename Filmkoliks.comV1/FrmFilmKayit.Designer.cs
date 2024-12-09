@@ -43,8 +43,17 @@
             this.lblAksiyon = new System.Windows.Forms.Label();
             this.grBOzellikler = new System.Windows.Forms.GroupBox();
             this.lblAltyazı = new System.Windows.Forms.Label();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.lblIngilizce = new System.Windows.Forms.Label();
             this.lblTurkce = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pBCinsellik = new System.Windows.Forms.PictureBox();
+            this.pBOlumsuzIcerik = new System.Windows.Forms.PictureBox();
+            this.pBGenelIzleyici = new System.Windows.Forms.PictureBox();
+            this.pBArtiOnUc = new System.Windows.Forms.PictureBox();
+            this.pBArtiYedi = new System.Windows.Forms.PictureBox();
+            this.pBKorkuSiddet = new System.Windows.Forms.PictureBox();
             this.lblGenelIzleyici = new System.Windows.Forms.Label();
             this.lblCinsellik = new System.Windows.Forms.Label();
             this.lblArtiOnUc = new System.Windows.Forms.Label();
@@ -52,10 +61,12 @@
             this.lblOlumsuzIcerik = new System.Windows.Forms.Label();
             this.lblKorkuSiddet = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lblYonetmenAra = new System.Windows.Forms.Label();
             this.txtYonetmenAra = new System.Windows.Forms.TextBox();
             this.fYonPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.lblOyuncuAra = new System.Windows.Forms.Label();
             this.txtOyuncuAra = new System.Windows.Forms.TextBox();
             this.fOyuncuPaneli = new System.Windows.Forms.FlowLayoutPanel();
@@ -70,6 +81,7 @@
             this.nAy = new System.Windows.Forms.NumericUpDown();
             this.nGun = new System.Windows.Forms.NumericUpDown();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblRating = new System.Windows.Forms.Label();
             this.rB10 = new System.Windows.Forms.RadioButton();
             this.rB1 = new System.Windows.Forms.RadioButton();
@@ -83,6 +95,7 @@
             this.rB5 = new System.Windows.Forms.RadioButton();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.btnResimYukle = new System.Windows.Forms.Button();
+            this.pBResim = new System.Windows.Forms.PictureBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.lblKarakter = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -93,36 +106,10 @@
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
             this.directorySearcher2 = new System.DirectoryServices.DirectorySearcher();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.pBResim = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pBCinsellik = new System.Windows.Forms.PictureBox();
-            this.pBOlumsuzIcerik = new System.Windows.Forms.PictureBox();
-            this.pBGenelIzleyici = new System.Windows.Forms.PictureBox();
-            this.pBArtiOnUc = new System.Windows.Forms.PictureBox();
-            this.pBArtiYedi = new System.Windows.Forms.PictureBox();
-            this.pBKorkuSiddet = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grBTur.SuspendLayout();
             this.grBOzellikler.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.grBVizyon.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nYil)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nAy)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nGun)).BeginInit();
-            this.groupBox8.SuspendLayout();
-            this.groupBox9.SuspendLayout();
-            this.groupBox10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBResim)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -132,6 +119,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.pBArtiOnUc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBArtiYedi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBKorkuSiddet)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            this.grBVizyon.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nYil)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nAy)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nGun)).BeginInit();
+            this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBResim)).BeginInit();
+            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -318,6 +318,16 @@
             this.lblAltyazı.Text = "ALTYAZI";
             this.lblAltyazı.Click += new System.EventHandler(this.lblAltyazı_Click);
             // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::Filmkoliks.comV1.Properties.Resources.closed_caption;
+            this.pictureBox5.Location = new System.Drawing.Point(195, 110);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(21, 33);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 20;
+            this.pictureBox5.TabStop = false;
+            // 
             // lblIngilizce
             // 
             this.lblIngilizce.AutoSize = true;
@@ -339,6 +349,86 @@
             this.lblTurkce.TabIndex = 18;
             this.lblTurkce.Text = "TÜRKÇE";
             this.lblTurkce.Click += new System.EventHandler(this.lblTurkce_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Filmkoliks.comV1.Properties.Resources.united_states;
+            this.pictureBox2.Location = new System.Drawing.Point(195, 80);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(21, 24);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 15;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::Filmkoliks.comV1.Properties.Resources.turkey;
+            this.pictureBox4.Location = new System.Drawing.Point(195, 46);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(21, 23);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 17;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pBCinsellik
+            // 
+            this.pBCinsellik.Image = global::Filmkoliks.comV1.Properties.Resources._lock;
+            this.pBCinsellik.Location = new System.Drawing.Point(10, 110);
+            this.pBCinsellik.Name = "pBCinsellik";
+            this.pBCinsellik.Size = new System.Drawing.Size(22, 33);
+            this.pBCinsellik.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pBCinsellik.TabIndex = 16;
+            this.pBCinsellik.TabStop = false;
+            // 
+            // pBOlumsuzIcerik
+            // 
+            this.pBOlumsuzIcerik.Image = global::Filmkoliks.comV1.Properties.Resources._lock;
+            this.pBOlumsuzIcerik.Location = new System.Drawing.Point(10, 70);
+            this.pBOlumsuzIcerik.Name = "pBOlumsuzIcerik";
+            this.pBOlumsuzIcerik.Size = new System.Drawing.Size(22, 33);
+            this.pBOlumsuzIcerik.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pBOlumsuzIcerik.TabIndex = 15;
+            this.pBOlumsuzIcerik.TabStop = false;
+            // 
+            // pBGenelIzleyici
+            // 
+            this.pBGenelIzleyici.Image = global::Filmkoliks.comV1.Properties.Resources._lock;
+            this.pBGenelIzleyici.Location = new System.Drawing.Point(10, 150);
+            this.pBGenelIzleyici.Name = "pBGenelIzleyici";
+            this.pBGenelIzleyici.Size = new System.Drawing.Size(22, 33);
+            this.pBGenelIzleyici.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pBGenelIzleyici.TabIndex = 14;
+            this.pBGenelIzleyici.TabStop = false;
+            // 
+            // pBArtiOnUc
+            // 
+            this.pBArtiOnUc.Image = global::Filmkoliks.comV1.Properties.Resources._lock;
+            this.pBArtiOnUc.Location = new System.Drawing.Point(194, 146);
+            this.pBArtiOnUc.Name = "pBArtiOnUc";
+            this.pBArtiOnUc.Size = new System.Drawing.Size(22, 33);
+            this.pBArtiOnUc.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pBArtiOnUc.TabIndex = 13;
+            this.pBArtiOnUc.TabStop = false;
+            // 
+            // pBArtiYedi
+            // 
+            this.pBArtiYedi.Image = global::Filmkoliks.comV1.Properties.Resources._lock;
+            this.pBArtiYedi.Location = new System.Drawing.Point(247, 146);
+            this.pBArtiYedi.Name = "pBArtiYedi";
+            this.pBArtiYedi.Size = new System.Drawing.Size(22, 33);
+            this.pBArtiYedi.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pBArtiYedi.TabIndex = 12;
+            this.pBArtiYedi.TabStop = false;
+            // 
+            // pBKorkuSiddet
+            // 
+            this.pBKorkuSiddet.Image = global::Filmkoliks.comV1.Properties.Resources._lock;
+            this.pBKorkuSiddet.Location = new System.Drawing.Point(10, 38);
+            this.pBKorkuSiddet.Name = "pBKorkuSiddet";
+            this.pBKorkuSiddet.Size = new System.Drawing.Size(22, 33);
+            this.pBKorkuSiddet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pBKorkuSiddet.TabIndex = 11;
+            this.pBKorkuSiddet.TabStop = false;
             // 
             // lblGenelIzleyici
             // 
@@ -422,6 +512,16 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "FİLM YÖNETMEN(LER)";
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::Filmkoliks.comV1.Properties.Resources.magnifying_glass;
+            this.pictureBox3.Location = new System.Drawing.Point(10, 239);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(21, 29);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 3;
+            this.pictureBox3.TabStop = false;
+            // 
             // lblYonetmenAra
             // 
             this.lblYonetmenAra.AutoSize = true;
@@ -451,6 +551,7 @@
             this.fYonPanel.Name = "fYonPanel";
             this.fYonPanel.Size = new System.Drawing.Size(369, 201);
             this.fYonPanel.TabIndex = 1;
+            this.fYonPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.fYonPanel_Paint);
             // 
             // groupBox6
             // 
@@ -467,6 +568,16 @@
             this.groupBox6.TabIndex = 9;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "FİLM OYUNCULAR";
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::Filmkoliks.comV1.Properties.Resources.magnifying_glass;
+            this.pictureBox6.Location = new System.Drawing.Point(10, 243);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(21, 29);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 17;
+            this.pictureBox6.TabStop = false;
             // 
             // lblOyuncuAra
             // 
@@ -685,6 +796,16 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "FİLM IMDB PUANI";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Filmkoliks.comV1.Properties.Resources.FİLMKOLİKS_GÖRSELLER__7_;
+            this.pictureBox1.Location = new System.Drawing.Point(165, -4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(28, 34);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
+            // 
             // lblRating
             // 
             this.lblRating.AutoSize = true;
@@ -837,6 +958,16 @@
             this.btnResimYukle.UseVisualStyleBackColor = false;
             this.btnResimYukle.Click += new System.EventHandler(this.btnResimYukle_Click);
             // 
+            // pBResim
+            // 
+            this.pBResim.Image = global::Filmkoliks.comV1.Properties.Resources.noGorsel;
+            this.pBResim.Location = new System.Drawing.Point(13, 33);
+            this.pBResim.Name = "pBResim";
+            this.pBResim.Size = new System.Drawing.Size(281, 301);
+            this.pBResim.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pBResim.TabIndex = 8;
+            this.pBResim.TabStop = false;
+            // 
             // groupBox10
             // 
             this.groupBox10.Controls.Add(this.lblKarakter);
@@ -925,136 +1056,6 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // pBResim
-            // 
-            this.pBResim.Image = global::Filmkoliks.comV1.Properties.Resources.noGorsel;
-            this.pBResim.Location = new System.Drawing.Point(13, 33);
-            this.pBResim.Name = "pBResim";
-            this.pBResim.Size = new System.Drawing.Size(281, 301);
-            this.pBResim.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pBResim.TabIndex = 8;
-            this.pBResim.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Filmkoliks.comV1.Properties.Resources.FİLMKOLİKS_GÖRSELLER__7_;
-            this.pictureBox1.Location = new System.Drawing.Point(165, -4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(28, 34);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Image = global::Filmkoliks.comV1.Properties.Resources.magnifying_glass;
-            this.pictureBox6.Location = new System.Drawing.Point(10, 243);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(21, 29);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox6.TabIndex = 17;
-            this.pictureBox6.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::Filmkoliks.comV1.Properties.Resources.magnifying_glass;
-            this.pictureBox3.Location = new System.Drawing.Point(10, 239);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(21, 29);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 3;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::Filmkoliks.comV1.Properties.Resources.closed_caption;
-            this.pictureBox5.Location = new System.Drawing.Point(195, 110);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(21, 33);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 20;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::Filmkoliks.comV1.Properties.Resources.united_states;
-            this.pictureBox2.Location = new System.Drawing.Point(195, 80);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(21, 24);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 15;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::Filmkoliks.comV1.Properties.Resources.turkey;
-            this.pictureBox4.Location = new System.Drawing.Point(195, 46);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(21, 23);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 17;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pBCinsellik
-            // 
-            this.pBCinsellik.Image = global::Filmkoliks.comV1.Properties.Resources._lock;
-            this.pBCinsellik.Location = new System.Drawing.Point(10, 110);
-            this.pBCinsellik.Name = "pBCinsellik";
-            this.pBCinsellik.Size = new System.Drawing.Size(22, 33);
-            this.pBCinsellik.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pBCinsellik.TabIndex = 16;
-            this.pBCinsellik.TabStop = false;
-            // 
-            // pBOlumsuzIcerik
-            // 
-            this.pBOlumsuzIcerik.Image = global::Filmkoliks.comV1.Properties.Resources._lock;
-            this.pBOlumsuzIcerik.Location = new System.Drawing.Point(10, 70);
-            this.pBOlumsuzIcerik.Name = "pBOlumsuzIcerik";
-            this.pBOlumsuzIcerik.Size = new System.Drawing.Size(22, 33);
-            this.pBOlumsuzIcerik.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pBOlumsuzIcerik.TabIndex = 15;
-            this.pBOlumsuzIcerik.TabStop = false;
-            // 
-            // pBGenelIzleyici
-            // 
-            this.pBGenelIzleyici.Image = global::Filmkoliks.comV1.Properties.Resources._lock;
-            this.pBGenelIzleyici.Location = new System.Drawing.Point(10, 150);
-            this.pBGenelIzleyici.Name = "pBGenelIzleyici";
-            this.pBGenelIzleyici.Size = new System.Drawing.Size(22, 33);
-            this.pBGenelIzleyici.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pBGenelIzleyici.TabIndex = 14;
-            this.pBGenelIzleyici.TabStop = false;
-            // 
-            // pBArtiOnUc
-            // 
-            this.pBArtiOnUc.Image = global::Filmkoliks.comV1.Properties.Resources._lock;
-            this.pBArtiOnUc.Location = new System.Drawing.Point(194, 146);
-            this.pBArtiOnUc.Name = "pBArtiOnUc";
-            this.pBArtiOnUc.Size = new System.Drawing.Size(22, 33);
-            this.pBArtiOnUc.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pBArtiOnUc.TabIndex = 13;
-            this.pBArtiOnUc.TabStop = false;
-            // 
-            // pBArtiYedi
-            // 
-            this.pBArtiYedi.Image = global::Filmkoliks.comV1.Properties.Resources._lock;
-            this.pBArtiYedi.Location = new System.Drawing.Point(247, 146);
-            this.pBArtiYedi.Name = "pBArtiYedi";
-            this.pBArtiYedi.Size = new System.Drawing.Size(22, 33);
-            this.pBArtiYedi.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pBArtiYedi.TabIndex = 12;
-            this.pBArtiYedi.TabStop = false;
-            // 
-            // pBKorkuSiddet
-            // 
-            this.pBKorkuSiddet.Image = global::Filmkoliks.comV1.Properties.Resources._lock;
-            this.pBKorkuSiddet.Location = new System.Drawing.Point(10, 38);
-            this.pBKorkuSiddet.Name = "pBKorkuSiddet";
-            this.pBKorkuSiddet.Size = new System.Drawing.Size(22, 33);
-            this.pBKorkuSiddet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pBKorkuSiddet.TabIndex = 11;
-            this.pBKorkuSiddet.TabStop = false;
-            // 
             // FrmFilmKayit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 31F);
@@ -1089,24 +1090,6 @@
             this.grBTur.PerformLayout();
             this.grBOzellikler.ResumeLayout(false);
             this.grBOzellikler.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.grBVizyon.ResumeLayout(false);
-            this.grBVizyon.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nYil)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nAy)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nGun)).EndInit();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBResim)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -1116,6 +1099,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.pBArtiOnUc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBArtiYedi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBKorkuSiddet)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            this.grBVizyon.ResumeLayout(false);
+            this.grBVizyon.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nYil)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nAy)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nGun)).EndInit();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBResim)).EndInit();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.ResumeLayout(false);
 
         }

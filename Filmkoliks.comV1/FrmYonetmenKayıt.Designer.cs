@@ -76,7 +76,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(679, 40);
             this.panel1.TabIndex = 2;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // button1
             // 
@@ -268,7 +267,6 @@
             this.label4.Size = new System.Drawing.Size(155, 28);
             this.label4.TabIndex = 9;
             this.label4.Text = "DOĞUM TARİHİ";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // txtSoyad
             // 
@@ -319,7 +317,7 @@
             // 
             // btnResimYukle
             // 
-            this.btnResimYukle.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnResimYukle.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.btnResimYukle.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnResimYukle.FlatAppearance.BorderSize = 0;
             this.btnResimYukle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -373,13 +371,12 @@
             this.lblKarakter.Size = new System.Drawing.Size(37, 23);
             this.lblKarakter.TabIndex = 6;
             this.lblKarakter.Text = "300";
-            this.lblKarakter.Click += new System.EventHandler(this.lblKarakter_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label7.ForeColor = System.Drawing.Color.RosyBrown;
+            this.label7.ForeColor = System.Drawing.Color.DarkSeaGreen;
             this.label7.Location = new System.Drawing.Point(467, 7);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(137, 20);
@@ -431,7 +428,6 @@
             this.Name = "FrmYonetmenKayıt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FrmYonetmenKayıt";
-            this.Load += new System.EventHandler(this.FrmYonetmenKayıt_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);

@@ -10,18 +10,12 @@ using System.Windows.Forms;
 
 namespace Filmkoliks.comV1
 {
-    public partial class salonListesi : UserControl
+    public partial class salonListesi : UserControl // Burada Inheritance (kalıtım) örneği var. salomListesi sınıfı UserControl sınıfından miras almış.
     {
         public salonListesi()
         {
             InitializeComponent();
         }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void gel(object sender, MouseEventArgs e)
         {
             
@@ -33,16 +27,6 @@ namespace Filmkoliks.comV1
         {
             
             this.BackColor = Color.WhiteSmoke;
-        }
-
-        private void lblKoltukSayisi_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void salonListesi_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -42,28 +42,28 @@
             this.btnResimYukle = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.pBResim = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtSoyad = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtAd = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pBResim = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nYil)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nAy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nGun)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBResim)).BeginInit();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnKaydet
@@ -277,6 +277,16 @@
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             // 
+            // pBResim
+            // 
+            this.pBResim.Image = global::Filmkoliks.comV1.Properties.Resources.noGorsel;
+            this.pBResim.Location = new System.Drawing.Point(21, 51);
+            this.pBResim.Name = "pBResim";
+            this.pBResim.Size = new System.Drawing.Size(171, 193);
+            this.pBResim.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pBResim.TabIndex = 7;
+            this.pBResim.TabStop = false;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -334,6 +344,26 @@
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Filmkoliks.comV1.Properties.Resources.erkek;
+            this.pictureBox2.Location = new System.Drawing.Point(95, 269);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 17;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Filmkoliks.comV1.Properties.Resources.kadin;
+            this.pictureBox1.Location = new System.Drawing.Point(241, 276);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(13, 23);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -380,36 +410,6 @@
             this.panel1.Size = new System.Drawing.Size(679, 41);
             this.panel1.TabIndex = 7;
             // 
-            // pBResim
-            // 
-            this.pBResim.Image = global::Filmkoliks.comV1.Properties.Resources.noGorsel;
-            this.pBResim.Location = new System.Drawing.Point(21, 51);
-            this.pBResim.Name = "pBResim";
-            this.pBResim.Size = new System.Drawing.Size(171, 193);
-            this.pBResim.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pBResim.TabIndex = 7;
-            this.pBResim.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::Filmkoliks.comV1.Properties.Resources.erkek;
-            this.pictureBox2.Location = new System.Drawing.Point(100, 269);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 17;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Filmkoliks.comV1.Properties.Resources.kadin;
-            this.pictureBox1.Location = new System.Drawing.Point(245, 276);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
-            // 
             // FrmOyuncuKayit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 31F);
@@ -428,7 +428,6 @@
             this.Name = "FrmOyuncuKayit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FrmOyuncuKayit";
-            this.Load += new System.EventHandler(this.FrmOyuncuKayit_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nYil)).EndInit();
@@ -436,13 +435,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.nGun)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBResim)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBResim)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }

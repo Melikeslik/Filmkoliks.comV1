@@ -175,7 +175,6 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(975, 387);
             this.panel5.TabIndex = 4;
-            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
             // lblBarkod2
             // 
@@ -381,7 +380,6 @@
             this.lblIslemTarihi.Size = new System.Drawing.Size(46, 28);
             this.lblIslemTarihi.TabIndex = 14;
             this.lblIslemTarihi.Text = "null";
-            this.lblIslemTarihi.Click += new System.EventHandler(this.lblIslemTarihi_Click);
             // 
             // panel8
             // 
@@ -515,7 +513,6 @@
             this.lblFilmAdi.TabIndex = 10;
             this.lblFilmAdi.Text = "null";
             this.lblFilmAdi.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblFilmAdi.Click += new System.EventHandler(this.lblFilmAdi_Click);
             // 
             // pictureBox4
             // 

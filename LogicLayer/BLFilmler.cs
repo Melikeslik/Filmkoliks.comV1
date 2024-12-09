@@ -53,5 +53,40 @@ namespace LogicLayer
 
             return uygunTarihler;
         }
+
+
+        // Film detaylarını getiren metod
+        public static EntityFilmler BLFilmDetayGetir(short id)
+        {
+            return DALFilmler.FilmDetayGetir(id);
+        }
+
+        // Filmin tüm alanlarını kontrol eden metod
+        public static string FilmEkle(EntityFilmler film)
+        {
+            if (string.IsNullOrEmpty(film.Adi) || string.IsNullOrEmpty(film.Turu) || string.IsNullOrEmpty(film.Ozellikleri) ||
+                string.IsNullOrEmpty(film.Yonetmen) || string.IsNullOrEmpty(film.Oyuncu) || string.IsNullOrEmpty(film.Detay) ||
+                string.IsNullOrEmpty(film.Puan) || string.IsNullOrEmpty(film.Afis) || string.IsNullOrEmpty(film.Tarih))
+            {
+                return "Lütfen tüm alanları doldurunuz!";
+            }
+
+            // Eğer tüm alanlar doluysa veritabanına kaydetme işlemi başlatılıyor
+            int sonuc = DALFilmler.FilmEkle(film);
+
+            return sonuc > 0 ? "Film başarıyla kaydedildi!" : "Film kaydedilirken bir hata oluştu!";
+        }
+
+        // Filmler listesini döndüren metot
+        public static List<EntityFilmler> GetAllFilmler()
+        {
+            return DALFilmler.GetAllFilmler();
+        }
+
+        // Arama yapılacak metni alır ve ilgili filmleri döndürür
+        public static List<EntityFilmler> GetFilmlerBySearch(string searchText)
+        {
+            return DALFilmler.GetFilmlerBySearch(searchText);
+        }
     }
 }

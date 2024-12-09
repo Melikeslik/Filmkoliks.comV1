@@ -27,37 +27,13 @@ namespace Filmkoliks.comV1
         {
             this.Close();
         }
-
-        //connectionstring
-        SqlConnection baglanti = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=FilmkoliksDB;Integrated Security=True");
+        
         private void FrmBiletOlustur_Load(object sender, EventArgs e)
         {
             filmAdiGetir();
             biletNoOlustur();
         }
 
-        //void filmAdiGetir()
-        //{
-        //    string sorgu = "select * from Tbl_Filmler ORDER BY ADI ASC";
-        //    baglanti.Open();
-        //    SqlCommand komut = new SqlCommand(sorgu, baglanti);
-        //    SqlDataReader oku = komut.ExecuteReader();
-        //    while (oku.Read())
-        //    {
-        //        string gelenTarih = oku["TARIH"].ToString();
-
-        //        DateTime fTarih = Convert.ToDateTime(gelenTarih);
-        //        DateTime bugun = DateTime.Today;
-
-        //        TimeSpan timeSpan = fTarih - bugun;
-        //        if (timeSpan.TotalDays >= 0)
-        //        {
-        //            cbFilmAdi.Items.Add(oku["ADI"].ToString());
-        //        }
-
-        //    }
-        //    baglanti.Close();
-        //}
         private void filmAdiGetir()
         {
             // Logic Layer'dan uygun film listesini alıyoruz
@@ -87,22 +63,6 @@ namespace Filmkoliks.comV1
             txtBarkod.Text = kod.ToString();
         }
 
-        //private void cbFilmAdi_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //distinct ---> Veritabanımızda kayıtlı olan aynı türlen veriler arasında sadece 1 tanesini getirir. (Diğer verilerin hiçbirini silmez, sadece 1 tane gösterir.)
-
-        //    cbTarih.Items.Clear();
-        //    string sorgu = "SELECT DISTINCT TARIH FROM Tbl_Kontrol WHERE FILMADI=@filmAdi";
-        //    baglanti.Open();
-        //    SqlCommand komut = new SqlCommand(sorgu, baglanti);
-        //    komut.Parameters.AddWithValue("@filmAdi", cbFilmAdi.Text.ToString());
-        //    SqlDataReader oku = komut.ExecuteReader();
-        //    while (oku.Read())
-        //    {
-        //        cbTarih.Items.Add(oku["TARIH"].ToString());
-        //    }
-        //    baglanti.Close();
-        //}
         private void cbFilmAdi_SelectedIndexChanged(object sender, EventArgs e)
         {
             // ComboBox'ı temizle
@@ -122,26 +82,6 @@ namespace Filmkoliks.comV1
             }
         }
 
-        //void biletNoSorgula()
-        //{
-        //    string sorgu = "select * from Tbl_Biletler WHERE BKOD=@no";
-        //    baglanti.Open();
-        //    SqlCommand komut = new SqlCommand(sorgu, baglanti);
-        //    komut.Parameters.AddWithValue("@no", txtBarkod.Text.ToString());
-        //    SqlDataReader oku = komut.ExecuteReader();
-        //    if (!oku.Read())
-        //    {
-        //        kaydetMETODU();
-        //    }
-        //    else
-        //    {
-        //        biletNoOlustur();
-        //        baglanti.Close();
-        //        biletNoSorgula();
-        //    }
-
-        //    baglanti.Close();
-        //}
         void biletNoSorgula()
         {
             // Kullanıcıdan alınan barkod numarasını alıyoruz
@@ -162,7 +102,6 @@ namespace Filmkoliks.comV1
             }
         }
 
-
         void kaydetMETODU()
         {
             //ekleme
@@ -181,41 +120,37 @@ namespace Filmkoliks.comV1
 
 
             // UPDATE KOMUTU
-            string sorgu2 = "UPDATE Tbl_Kontrol SET KOLTUKLAR=@numara WHERE FILMADI=@filmadi AND TARIH=@tarih AND SAAT=@saat AND SALONADI=@salonadi";
-            baglanti.Open();
-            SqlCommand guncelle = new SqlCommand(sorgu2, baglanti);
-
-            if (lblGelenKoltuk.Text.ToString() == "")
+            // Kullanıcıdan alınan bilgileri Entity nesnesine atıyoruz
+            EntityKontrol kontrol = new EntityKontrol
             {
-                guncelle.Parameters.AddWithValue("@numara", txtKoltuklar.Text.ToString());
+                FilmAdi = cbFilmAdi.Text,
+                Tarih = cbTarih.Text,
+                Saat = lblSeansSec.Text,
+                SalonAdi = cbSalon.Text,
+                Koltuklar = txtKoltuklar.Text
+            };
+
+            // Gelen koltuk verisini kontrol ediyoruz
+            string gelenKoltuk = lblGelenKoltuk.Text;
+
+            // BL katmanına gönderip güncelleme işlemini gerçekleştiriyoruz
+            bool guncellemeSonucu = BLKontrol.KontrolGuncelle(kontrol, gelenKoltuk);
+
+            if (guncellemeSonucu)
+            {
+                MessageBox.Show("BİLETİNİZ OLUŞTURULMUŞTUR.");
+                salonDurumGeldi();
+
+                lblGelenKoltuk.Text = "";
+                listeGelenKoltuk.Items.Clear();
+                lbBelirlenen.Items.Clear();
+                txtKoltuklar.Text = "";
             }
             else
             {
-                guncelle.Parameters.AddWithValue("@numara", lblGelenKoltuk.Text.ToString() + "," + txtKoltuklar.Text.ToString());
+                MessageBox.Show("Bilet oluşturma sırasında bir hata oluştu. Lütfen bilgileri kontrol edin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            guncelle.Parameters.AddWithValue("@filmadi", cbFilmAdi.Text.ToString());
-            guncelle.Parameters.AddWithValue("@tarih", cbTarih.Text.ToString());
-            guncelle.Parameters.AddWithValue("@saat", lblSeansSec.Text.ToString());
-            guncelle.Parameters.AddWithValue("@salonadi", cbSalon.Text.ToString());
-            guncelle.ExecuteNonQuery();
-            baglanti.Close();
-            //EntityKontrol ent = new EntityKontrol();
-            //ent.FilmAdi = cbFilmAdi.Text.ToString();
-            //ent.Tarih = cbTarih.Text.ToString();
-            //ent.Saat = lblSeansSec.Text.ToString();
-            //ent.SalonAdi = cbSalon.Text.ToString();
-            //BLBiletler.BLBiletGuncelle(ent);
-
-
-
-            MessageBox.Show("BİLETİNİZ OLUŞTURULMUŞTUR.");
-            salonDurumGeldi();
-
-            lblGelenKoltuk.Text = "";
-            listeGelenKoltuk.Items.Clear();
-            lbBelirlenen.Items.Clear();
-            txtKoltuklar.Text = "";
         }
         private void btnOlustur_Click(object sender, EventArgs e)
         {
@@ -270,112 +205,97 @@ namespace Filmkoliks.comV1
             }
         }
 
-        //private void cbTarih_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    panelSEANS.Controls.Clear();
-        //    string saatler = "";
-
-        //    string sorgu = "SELECT DISTINCT SAAT FROM Tbl_Kontrol WHERE FILMADI=@filmAdi AND TARIH=@tarih";
-        //    baglanti.Open();
-        //    SqlCommand komut = new SqlCommand(sorgu, baglanti);
-        //    komut.Parameters.AddWithValue("@filmAdi", cbFilmAdi.Text.ToString());
-        //    komut.Parameters.AddWithValue("@tarih", cbTarih.Text.ToString());
-        //    SqlDataReader oku = komut.ExecuteReader();
-        //    while (oku.Read())
-        //    {
-        //        saatler = oku["SAAT"].ToString();
-        //        RadioButton rnd = new RadioButton();
-        //        rnd.Text = saatler;
-        //        rnd.ForeColor = Color.Red;
-        //        rnd.FlatStyle = FlatStyle.Flat;
-        //        rnd.Width = 70;
-        //        rnd.Font = new System.Drawing.Font("Segoe UI Semibold", 12);
-        //        rnd.CheckedChanged += new EventHandler(SeansSaatler);
-        //        panelSEANS.Controls.Add(rnd);
-        //    }
-        //    baglanti.Close();
-        //}
         private void cbTarih_SelectedIndexChanged(object sender, EventArgs e)
         {
-            panelSEANS.Controls.Clear();
+            panelSEANS.Controls.Clear(); // Önceden eklenen kontrolleri temizliyoruz
+
             string filmAdi = cbFilmAdi.Text.ToString();
             string tarih = cbTarih.Text.ToString();
 
-            // Business Logic Layer'dan saatleri al
-            List<EntityKontrol> saatlerListesi = LogicLayer.BLKontrol.SaatleriGetir(filmAdi, tarih);
+            // Saat verilerini BL katmanından alıyoruz
+            List<EntityKontrol> saatlerListesi = BLKontrol.SaatleriGetir(filmAdi, tarih);
 
-            // Gelen saatleri UI'ya ekle
+            // Gelen saatleri UI'ya ekliyoruz
             foreach (var kontrol in saatlerListesi)
             {
                 string saatler = kontrol.Saat; // Saat bilgisi Entity'den alınıyor
-                RadioButton rnd = new RadioButton
-                {
-                    Text = saatler,
-                    ForeColor = Color.Red,
-                    FlatStyle = FlatStyle.Flat,
-                    Width = 70,
-                    Font = new System.Drawing.Font("Segoe UI Semibold", 12)
-                };
+
+                // Yeni bir RadioButton oluşturuyoruz
+                RadioButton rnd = new RadioButton();
+                rnd.Text = saatler;
+                rnd.ForeColor = Color.Red;
+                rnd.FlatStyle = FlatStyle.Flat;
+                rnd.Width = 70;
+                rnd.Font = new System.Drawing.Font("Segoe UI Semibold", 12);
+
+                // Saat seçildiğinde çalışacak event handler
                 rnd.CheckedChanged += new EventHandler(SeansSaatler);
+
+                // Panel üzerine RadioButton ekliyoruz
                 panelSEANS.Controls.Add(rnd);
             }
         }
 
-        private void SeansSaatler( object sender, EventArgs e)
+        private void SeansSaatler(object sender, EventArgs e)
         {
-            //foreach dngümüzü kullanacağız.
-            foreach ( RadioButton item in panelSEANS.Controls)
+            foreach (RadioButton item in panelSEANS.Controls)
             {
-                if(item.Checked) //bu format seçili
+                if (item.Checked) // Seçili format
                 {
                     lblSeansSec.Text = item.Text;
                     cbSalon.Items.Clear();
-                    string sorgu = "SELECT DISTINCT SALONADI FROM Tbl_Kontrol WHERE FILMADI=@filmAdi AND TARIH=@tarih AND SAAT=@saat";
-                    baglanti.Open();
-                    SqlCommand komut = new SqlCommand(sorgu, baglanti);
-                    komut.Parameters.AddWithValue("@filmAdi", cbFilmAdi.Text.ToString());
-                    komut.Parameters.AddWithValue("@tarih", cbTarih.Text.ToString());
-                    komut.Parameters.AddWithValue("saat", lblSeansSec.Text.ToString());
-                    SqlDataReader oku = komut.ExecuteReader();
-                    while (oku.Read())
+
+                    // Kullanıcı seçimlerini Entity nesnesine atıyoruz
+                    EntityKontrol kontrol = new EntityKontrol
                     {
-                        cbSalon.Items.Add(oku["SALONADI"].ToString());
+                        FilmAdi = cbFilmAdi.Text,
+                        Tarih = cbTarih.Text,
+                        Saat = lblSeansSec.Text
+                    };
+
+                    // BL katmanından salonları getiriyoruz
+                    List<string> salonlar = BLKontrol.GetSalonlar(kontrol);
+
+                    if (salonlar != null)
+                    {
+                        foreach (string salon in salonlar)
+                        {
+                            cbSalon.Items.Add(salon); // ComboBox'a ekleme yapılıyor
+                        }
                     }
-                    baglanti.Close();
+                    else
+                    {
+                        MessageBox.Show("Salon bilgileri getirilemedi. Lütfen bilgileri kontrol edin.");
+                    }
                 }
             }
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panelSEANS_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void cbSalon_SelectedIndexChanged(object sender, EventArgs e)
         {
             salonDurumGeldi();
         }
-        void salonDurumGeldi()
+
+        private void salonDurumGeldi()
         {
-            string sorgu = "SELECT * FROM Tbl_Salonlar WHERE SALONADI=@salonAdi";
-            baglanti.Open();
-            SqlCommand komut = new SqlCommand(sorgu, baglanti);
-            komut.Parameters.AddWithValue("@salonAdi", cbSalon.Text.ToString());
-            SqlDataReader oku = komut.ExecuteReader();
-            while (oku.Read())
+            string salonAdi = cbSalon.Text.ToString();
+
+            // BL katmanını kullanarak salon bilgilerini getiriyoruz
+            EntitySalonlar salon = BLSalonlar.SalonBilgisiGetir(salonAdi);
+
+            if (salon != null)
             {
-                lblKoltukSayisi.Text = oku["KOLTUKSAYISI"].ToString();
+                lblKoltukSayisi.Text = salon.KoltukSayisi;
+
+                koltukGetir(); 
+                doldur();      
             }
-            baglanti.Close();
-            // Seçili olan koltukları veritabanından çekmiş oluyoruz.
-            koltukGetir();
-            doldur();
+            else
+            {
+                MessageBox.Show("Salon bulunamadı.");
+            }
         }
+
         void doldur()
         {
             koltukPaneli.Controls.Clear();
@@ -439,7 +359,6 @@ namespace Filmkoliks.comV1
                 btn.Width = 60;
                 btn.Height = 60;
                 btn.FlatStyle = FlatStyle.Flat;
-                //btn.FlatAppearance.BorderSize = 0;   // Bence butonların etrafında çerçeve olması güzel durduğu için bu satırı yoruma aldım.
                 btn.Font = new System.Drawing.Font("Segue UI Semibold", 12);
                 btn.BackColor = Color.White;
                 btn.ForeColor = Color.Green;
@@ -447,40 +366,37 @@ namespace Filmkoliks.comV1
 
                 if (listeGelenKoltuk.Items.Contains(btn.Text))
                 {
-                    // Buraya  512lik görseller çok büyük geldiği için arkaplan rengi değişmiş gibi oluyor sadece. 16lık ve 32lik ile denedim o da küçük geldi burayı daha sonra ayarlarız.
                     btn.Image = (System.Drawing.Image)(Properties.Resources.kirmizi);
                     btn.ImageAlign = ContentAlignment.MiddleCenter;
                     btn.ForeColor = Color.Black;
-                    //btn.TextAlign = ContentAlignment.MiddleRight;  // burada text aligment'ı sağa yaslıyor hoca buna gerek yok
-                    //btn.BackColor = Color.Red; // Koltuk seçili ise
                 }
                 else
                 {
                     btn.Image = (System.Drawing.Image)(Properties.Resources.mavi); 
                     btn.ImageAlign = ContentAlignment.MiddleCenter;
                     btn.ForeColor = Color.Yellow;
-                    //btn.BackColor= Color.SkyBlue; // Koltuk seçili değil ise
                 }
 
                 koltukPaneli.Controls.Add(btn);
             }
         }
 
-        void koltukGetir()
+        private void koltukGetir()
         {
             lblGelenKoltuk.Text = "";
-            string sorgu = "SELECT * FROM Tbl_Kontrol WHERE FILMADI=@filmAdi AND TARIH=@tarih AND SAAT=@saat AND SALONADI=@salonAdi";
-            baglanti.Open();
-            SqlCommand komut = new SqlCommand(sorgu, baglanti);
-            komut.Parameters.AddWithValue("@filmAdi", cbFilmAdi.Text.ToString());
-            komut.Parameters.AddWithValue("@tarih", cbTarih.Text.ToString());
-            komut.Parameters.AddWithValue("@saat", lblSeansSec.Text.ToString());
-            komut.Parameters.AddWithValue("@salonAdi", cbSalon.Text.ToString());
-            SqlDataReader oku = komut.ExecuteReader();
-            while (oku.Read())
+
+            // BL katmanını kullanarak koltuk bilgisini alıyoruz
+            List<EntityKontrol> koltukListesi = BLKontrol.KoltukBilgisiGetir(cbFilmAdi.Text, cbTarih.Text, lblSeansSec.Text, cbSalon.Text);
+
+            if (koltukListesi != null && koltukListesi.Count > 0)
             {
-                lblGelenKoltuk.Text += " ," + oku["KOLTUKLAR"].ToString();
-                if (lblGelenKoltuk.Text.Length > 2 )
+                foreach (var item in koltukListesi)
+                {
+                    lblGelenKoltuk.Text += " ," + item.Koltuklar;
+                }
+
+                // Gereksiz başlangıçtaki virgülü kaldırıyoruz
+                if (lblGelenKoltuk.Text.Length > 2)
                 {
                     lblGelenKoltuk.Text = lblGelenKoltuk.Text.Substring(2);
                 }
@@ -488,11 +404,10 @@ namespace Filmkoliks.comV1
                 {
                     lblGelenKoltuk.Text = "";
                 }
-            }
-            baglanti.Close();
 
-            // Koltuk numaralarını ayırma...
-            koltukAyirma();
+                // Koltuk numaralarını ayırma işlemi
+                koltukAyirma();
+            }
         }
 
         void koltukAyirma()
@@ -504,14 +419,9 @@ namespace Filmkoliks.comV1
             sec = no.Split(',');
            // Split --> Hangi karakteri belittiysek o karakterde ayırma işlemi yapmaya yarayan komut. Tek tırnak içerisinde karakter verilir.
            foreach (string bulunan in sec)
-            {
+           {
                 listeGelenKoltuk.Items.Add(bulunan);
-            }
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
+           }
         }
 
         private void btnTemizle_Click(object sender, EventArgs e)
@@ -539,8 +449,6 @@ namespace Filmkoliks.comV1
             listeGelenKoltuk.Items.Clear();
             filmAdiGetir();
             txtAdSoyad.Focus();
-           
-
         }
     }
 }

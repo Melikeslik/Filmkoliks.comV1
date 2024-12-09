@@ -9,6 +9,8 @@ namespace DataAccessLayer
 {
     public class Baglanti
     {
+        //connectionstring dediğimiz veritabanımızın yolunu projemize eklememiz gerekiyor.ve veritabanımızın yolunu programımıza söylememiz gerekiyor.
+        //SqlConnection baglanti = new SqlConnection("Data Source=Veritabanımızın_Yolu;Initial Catalog=Veritabanımızın_Adı;Integrated Security=;True");
         public static SqlConnection baglanti = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=FilmkoliksDB;Integrated Security=True");
     }
 }

@@ -71,15 +71,15 @@
             // 
             // btnResimYukle
             // 
-            this.btnResimYukle.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnResimYukle.BackColor = System.Drawing.Color.DarkGray;
             this.btnResimYukle.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnResimYukle.FlatAppearance.BorderSize = 0;
             this.btnResimYukle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResimYukle.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnResimYukle.ForeColor = System.Drawing.Color.White;
-            this.btnResimYukle.Location = new System.Drawing.Point(392, 67);
+            this.btnResimYukle.Location = new System.Drawing.Point(418, 83);
             this.btnResimYukle.Name = "btnResimYukle";
-            this.btnResimYukle.Size = new System.Drawing.Size(169, 47);
+            this.btnResimYukle.Size = new System.Drawing.Size(143, 31);
             this.btnResimYukle.TabIndex = 6;
             this.btnResimYukle.Text = "DETAY";
             this.btnResimYukle.UseVisualStyleBackColor = false;
@@ -127,9 +127,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(567, 67);
+            this.button1.Location = new System.Drawing.Point(567, 83);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 47);
+            this.button1.Size = new System.Drawing.Size(71, 31);
             this.button1.TabIndex = 10;
             this.button1.Text = "SİL";
             this.button1.UseVisualStyleBackColor = false;

@@ -45,6 +45,11 @@
     <Compile Include="DALBiletler.cs" />
     <Compile Include="DALFilmler.cs" />
     <Compile Include="DALKontrol.cs" />
+    <Compile Include="DALKullanicilar.cs" />
+    <Compile Include="DALOyuncular.cs" />
+    <Compile Include="DALSalonlar.cs" />
+    <Compile Include="DALSecilenler.cs" />
+    <Compile Include="DALYonetmenler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

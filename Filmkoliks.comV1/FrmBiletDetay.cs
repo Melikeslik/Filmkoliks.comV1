@@ -76,20 +76,5 @@ namespace Filmkoliks.comV1
         {
             this.Close();
         }
-
-        private void lblFilmAdi_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel5_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblIslemTarihi_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

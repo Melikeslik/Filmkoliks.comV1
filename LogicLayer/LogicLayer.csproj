@@ -44,6 +44,11 @@
     <Compile Include="BLBiletler.cs" />
     <Compile Include="BLFilmler.cs" />
     <Compile Include="BLKontrol.cs" />
+    <Compile Include="BLKullanicilar.cs" />
+    <Compile Include="BLOyuncular.cs" />
+    <Compile Include="BLSalonlar.cs" />
+    <Compile Include="BLSecilenler.cs" />
+    <Compile Include="BLYonetmenler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

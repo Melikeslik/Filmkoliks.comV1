@@ -51,7 +51,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(679, 36);
             this.panel1.TabIndex = 3;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // button1
             // 
@@ -105,8 +104,8 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label2.Location = new System.Drawing.Point(210, 6);
+            this.label2.ForeColor = System.Drawing.Color.DarkRed;
+            this.label2.Location = new System.Drawing.Point(244, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(142, 28);
             this.label2.TabIndex = 0;
@@ -131,7 +130,6 @@
             this.ListePaneli.Name = "ListePaneli";
             this.ListePaneli.Size = new System.Drawing.Size(679, 587);
             this.ListePaneli.TabIndex = 0;
-            this.ListePaneli.Paint += new System.Windows.Forms.PaintEventHandler(this.ListePaneli_Paint);
             // 
             // FrmYonetmenListesi
             // 
