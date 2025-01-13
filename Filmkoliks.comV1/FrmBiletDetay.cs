@@ -20,6 +20,7 @@ namespace Filmkoliks.comV1
         {
             InitializeComponent();
         }
+
         public string biletNo = "";
 
         private void FrmBiletDetay_Load(object sender, EventArgs e)
@@ -28,7 +29,6 @@ namespace Filmkoliks.comV1
             lblBiletNo2.Text = biletNo;
             barkodNoOlustur();
             bilgiGetir();
-
         }
 
         void bilgiGetir()

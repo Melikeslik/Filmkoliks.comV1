@@ -532,7 +532,6 @@
             this.lblYonetmenAra.Size = new System.Drawing.Size(117, 23);
             this.lblYonetmenAra.TabIndex = 0;
             this.lblYonetmenAra.Text = "yönetmen ara";
-            this.lblYonetmenAra.Click += new System.EventHandler(this.label2_Click);
             // 
             // txtYonetmenAra
             // 
@@ -551,7 +550,6 @@
             this.fYonPanel.Name = "fYonPanel";
             this.fYonPanel.Size = new System.Drawing.Size(369, 201);
             this.fYonPanel.TabIndex = 1;
-            this.fYonPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.fYonPanel_Paint);
             // 
             // groupBox6
             // 
@@ -589,7 +587,6 @@
             this.lblOyuncuAra.Size = new System.Drawing.Size(96, 23);
             this.lblOyuncuAra.TabIndex = 2;
             this.lblOyuncuAra.Text = "oyuncu ara";
-            this.lblOyuncuAra.Click += new System.EventHandler(this.lblOyuncuAra_Click);
             // 
             // txtOyuncuAra
             // 
@@ -608,7 +605,6 @@
             this.fOyuncuPaneli.Name = "fOyuncuPaneli";
             this.fOyuncuPaneli.Size = new System.Drawing.Size(368, 204);
             this.fOyuncuPaneli.TabIndex = 3;
-            this.fOyuncuPaneli.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // grBVizyon
             // 
@@ -815,7 +811,6 @@
             this.lblRating.TabIndex = 15;
             this.lblRating.Text = "1";
             this.lblRating.Visible = false;
-            this.lblRating.Click += new System.EventHandler(this.lblRating_Click);
             // 
             // rB10
             // 
@@ -982,7 +977,6 @@
             this.groupBox10.TabIndex = 13;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "FİLM DETAYI";
-            this.groupBox10.Enter += new System.EventHandler(this.groupBox10_Enter);
             // 
             // lblKarakter
             // 
@@ -1076,7 +1070,7 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Location = new System.Drawing.Point(400, 80);
+            this.Location = new System.Drawing.Point(400, 50);
             this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Name = "FrmFilmKayit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

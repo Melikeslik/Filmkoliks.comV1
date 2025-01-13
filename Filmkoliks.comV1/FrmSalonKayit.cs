@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Xml.Schema;
 using DataAccessLayer;
+using EntityLayer;
+using LogicLayer;
 
 namespace Filmkoliks.comV1
 {
@@ -25,48 +27,29 @@ namespace Filmkoliks.comV1
             this.Close();
         }
 
-        private void txtAd_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnResimYukle_Click(object sender, EventArgs e)
         {
             if (txtSalonAdi.Text != "" && cbKoltukSayisi.Text != "")
             {
-                Baglanti.baglanti.Open();
-                SqlCommand kaydet = new SqlCommand("insert into Tbl_Salonlar (SALONADI, KOLTUKSAYISI) VALUES (@P1, @P2)" , Baglanti.baglanti);
-                kaydet.Parameters.AddWithValue("@p1", txtSalonAdi.Text);
-                kaydet.Parameters.AddWithValue("@p2", cbKoltukSayisi.Text);
-                kaydet.ExecuteNonQuery();
-                Baglanti.baglanti.Close();
+                EntitySalonlar yeniSalon = new EntitySalonlar
+                {
+                    SalonAdi = txtSalonAdi.Text,
+                    KoltukSayisi = cbKoltukSayisi.Text
+                };
+
+                // BL katmanına salon kaydetme isteğini gönderiyoruz
+                BLSalonlar.SalonKaydet(yeniSalon);
+
                 MessageBox.Show("SALON KAYDETME İŞLEMİ GERÇEKLEŞTİRİLDİ");
                 txtSalonAdi.Text = "";
                 cbKoltukSayisi.Text = "";
                 txtSalonAdi.Focus();
                 listeGetir();
-
-                  
             }
             else
             {
                 MessageBox.Show("LÜTFEN BİR DEĞER GİRİNİZ!");
             }
-
-        }
-       
-        private void panelSalon_Paint(object sender, PaintEventArgs e)
-        {
-        
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
 
         }
 
@@ -75,34 +58,24 @@ namespace Filmkoliks.comV1
             listeGetir();
         }
 
-
-        
         void kOlustur()
         {
             for ( int i=1; i<=200; i++)
             {
                 cbKoltukSayisi.Items.Add(i);
             }
-
-           
         }
-        
-
 
         void listeGetir()
         {
-            panelSalon.Controls.Clear();
-            Baglanti.baglanti.Open();
-            SqlCommand komut = new SqlCommand("select * from Tbl_Salonlar ORDER BY SALONADI ASC", Baglanti.baglanti);
-            SqlDataReader oku = komut.ExecuteReader();
-            while (oku.Read())
+            List<EntitySalonlar> salonlar = BLSalonlar.BLSalonAdiGetir();
+            foreach (var salon in salonlar)
             {
                 salonListesi arac = new salonListesi();
-                arac.lblSalonAdi.Text = oku["SALONADI"].ToString();
-                arac.lblKoltukSayisi.Text = oku["KOLTUKSAYISI"].ToString();
+                arac.lblSalonAdi.Text =salon.SalonAdi.ToString();
+                arac.lblKoltukSayisi.Text = salon.KoltukSayisi.ToString();
                 panelSalon.Controls.Add(arac);
             }
-            Baglanti.baglanti.Close();
         }
     }
 }

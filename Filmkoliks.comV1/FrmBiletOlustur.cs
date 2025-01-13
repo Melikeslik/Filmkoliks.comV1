@@ -165,6 +165,7 @@ namespace Filmkoliks.comV1
                 MessageBox.Show("LÜTFEN TÜM ALANLARI EKSİKSİZ DOLDURUNUZ!");
             }
         }
+
         void secTiklerimiz()
         {
             txtKoltuklar.Text = "";
@@ -177,6 +178,7 @@ namespace Filmkoliks.comV1
                 txtKoltuklar.Text = txtKoltuklar.Text.Substring(1);
             }
         }
+
         private void BtnKoltuk_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;

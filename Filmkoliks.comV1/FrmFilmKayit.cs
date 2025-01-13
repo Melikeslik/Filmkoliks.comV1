@@ -18,27 +18,26 @@ namespace Filmkoliks.comV1
             InitializeComponent();
         }
 
-        //connectionstring
-        SqlConnection baglanti = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=FilmkoliksDB;Integrated Security=True");
-
+        string yonetmen = "";
+        string oyuncu = "";
+        string resimYolu = "";
+        string vTarih = "";
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
             verileriSil();
-
         }
+
         void verileriSil()
         {
+            yonetmen = "";
+            oyuncu = "";
             DALSecilenler.SecilenleriSil();
             Console.WriteLine("Seçilenler tablosu içeriği silindi!");
         }
 
-        private void radioButton6_CheckedChanged(object sender, EventArgs e)
-        {
-            lblRating.Text = "6";
-        }
-
+        #region Radio Buttons
         private void radioButton10_CheckedChanged(object sender, EventArgs e)
         {
             lblRating.Text = "10";
@@ -69,6 +68,11 @@ namespace Filmkoliks.comV1
             lblRating.Text = "5";
         }
 
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            lblRating.Text = "6";
+        }
+
         private void rB7_CheckedChanged(object sender, EventArgs e)
         {
             lblRating.Text = "7";
@@ -84,7 +88,8 @@ namespace Filmkoliks.comV1
             lblRating.Text = "9";
         }
 
-        string resimYolu = "";
+        #endregion
+
         private void btnResimYukle_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -101,31 +106,11 @@ namespace Filmkoliks.comV1
             }
         }
 
-        private void lblRating_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             int karakterSayisi = txtFilmDetay.Text.Length;
             int geri = 300 - karakterSayisi;
             lblKarakter.Text = geri.ToString();
-        }
-
-        private void groupBox10_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void FrmFilmKayit_Load(object sender, EventArgs e)
@@ -145,70 +130,30 @@ namespace Filmkoliks.comV1
         }
         void yListesiGetir()
         {
-            string sorgu = "select * from Tbl_Yonetmenler ORDER BY ADSOYAD ASC";
             fYonPanel.Controls.Clear();
-            baglanti.Open();
-            SqlCommand komut = new SqlCommand(sorgu, baglanti);
-            SqlDataReader oku = komut.ExecuteReader();
-            while (oku.Read())
+            List<EntityYonetmenler> yonetmenler = BLYonetmenler.BLYonetmenListele();
+            foreach (var yonetmen in yonetmenler)
             {
                 yListeAraci arac = new yListeAraci();
-                arac.lblAdi.Text = oku["ADSOYAD"].ToString();
+                arac.lblAdi.Text = yonetmen.AdSoyad;
                 fYonPanel.Controls.Add(arac);
             }
-            baglanti.Close();
         }
-        //private void yListesiGetir()
-        //{
-        //    // Paneli temizliyoruz
-        //    fYonPanel.Controls.Clear();
 
-        //    // Yönetmenler listesini BL katmanından alıyoruz
-        //    List<EntityYonetmenler> yonetmenListesi = BLYonetmenler.BLYonetmenListesiGetir();
-
-        //    foreach (var yonetmen in yonetmenListesi)
-        //    {
-        //        yListeAraci arac = new yListeAraci();
-        //        arac.lblAdi.Text = yonetmen.AdSoyad; // Yönetmenin adı soyadı
-        //        fYonPanel.Controls.Add(arac); // Panel'e ekleme
-        //    }
-        //}
-
-        //oyuncu listesi
-        void oListesiGetir()
+        private void oListesiGetir()
         {
-            string sorgu = "select * from Tbl_Oyuncular ORDER BY ADSOYAD ASC";
+            // Paneli temizliyoruz
             fOyuncuPaneli.Controls.Clear();
-            baglanti.Open();
-            SqlCommand komut = new SqlCommand(sorgu, baglanti);
-            SqlDataReader oku = komut.ExecuteReader();
-            while (oku.Read())
+
+            // Oyuncular listesini BL katmanından alıyoruz
+            List<EntityOyuncular> oyuncuListesi = BLOyuncular.BLOyuncuListesiGetir();
+
+            foreach (var oyuncu in oyuncuListesi)
             {
                 oListeAraci arac = new oListeAraci();
-                arac.lblAdi.Text = oku["ADSOYAD"].ToString();
-                fOyuncuPaneli.Controls.Add(arac);
+                arac.lblAdi.Text = oyuncu.AdSoyad;  // Oyuncu adı soyadı
+                fOyuncuPaneli.Controls.Add(arac);  // Panel'e ekleme
             }
-            baglanti.Close();
-        }
-        //private void oListesiGetir()
-        //{
-        //    // Paneli temizliyoruz
-        //    fOyuncuPaneli.Controls.Clear();
-
-        //    // Oyuncular listesini BL katmanından alıyoruz
-        //    List<EntityOyuncular> oyuncuListesi = BLOyuncular.BLOyuncuListesiGetir();
-
-        //    foreach (var oyuncu in oyuncuListesi)
-        //    {
-        //        oListeAraci arac = new oListeAraci();
-        //        arac.lblAdi.Text = oyuncu.AdSoyad;  // Oyuncu adı soyadı
-        //        fOyuncuPaneli.Controls.Add(arac);  // Panel'e ekleme
-        //    }
-        //}
-
-        private void lblOyuncuAra_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void txtOyuncuAra_MouseMove(object sender, MouseEventArgs e)
@@ -236,37 +181,18 @@ namespace Filmkoliks.comV1
             oyuncuAra();
             lblOyuncuAra.Visible = false;
         }
+
         void oyuncuAra()
         {
-            string sorgu = "select * from Tbl_Oyuncular Where ADSOYAD LIKE '%" + txtOyuncuAra.Text + "%' ORDER BY ADSOYAD ASC";
             fOyuncuPaneli.Controls.Clear();
-            baglanti.Open();
-            SqlCommand komut = new SqlCommand(sorgu, baglanti);
-            SqlDataReader oku = komut.ExecuteReader();
-            while (oku.Read())
+            List<EntityOyuncular> oyuncular = BLOyuncular.BLOyuncuAra(txtOyuncuAra.Text);
+            foreach (var oyuncu in oyuncular)
             {
                 oListeAraci arac = new oListeAraci();
-                arac.lblAdi.Text = oku["ADSOYAD"].ToString();
+                arac.lblAdi.Text = oyuncu.AdSoyad;
                 fOyuncuPaneli.Controls.Add(arac);
             }
-            baglanti.Close();
         }
-        //private void oyuncuAra()
-        //{
-        //    // Paneli temizliyoruz
-        //    fOyuncuPaneli.Controls.Clear();
-
-        //    // Oyuncular listesini BL katmanından alıyoruz
-        //    string aranan = txtOyuncuAra.Text;
-        //    List<EntityOyuncular> oyuncuListesi = BLOyuncular.BLOyuncuAra(aranan);
-
-        //    foreach (var oyuncu in oyuncuListesi)
-        //    {
-        //        oListeAraci arac = new oListeAraci();
-        //        arac.lblAdi.Text = oyuncu.AdSoyad;  // Oyuncu adı soyadı
-        //        fOyuncuPaneli.Controls.Add(arac);  // Panel'e ekleme
-        //    }
-        //}
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
@@ -276,36 +202,15 @@ namespace Filmkoliks.comV1
 
         void yonetmenAra()
         {
-            string sorgu = "select * from Tbl_Yonetmenler Where ADSOYAD LIKE '%" + txtYonetmenAra.Text + "%' COLLATE TURKISH_CI_AS ORDER BY ADSOYAD ASC";
             fYonPanel.Controls.Clear();
-            baglanti.Open();
-            SqlCommand komut = new SqlCommand(sorgu, baglanti);
-            SqlDataReader oku = komut.ExecuteReader();
-            while (oku.Read())
+            List<EntityYonetmenler> yonetmenler = BLYonetmenler.BLYonetmenAra(txtYonetmenAra.Text);
+            foreach (var yonetmen in yonetmenler)
             {
                 yListeAraci arac = new yListeAraci();
-                arac.lblAdi.Text = oku["ADSOYAD"].ToString();
+                arac.lblAdi.Text = yonetmen.AdSoyad;
                 fYonPanel.Controls.Add(arac);
             }
-            baglanti.Close();
         }
-        //private void yonetmenAra()
-        //{
-        //    // Paneli temizliyoruz
-        //    fYonPanel.Controls.Clear();
-
-        //    // BL katmanındaki arama fonksiyonunu kullanıyoruz
-        //    string aranan = txtYonetmenAra.Text;
-        //    List<EntityYonetmenler> yonetmenListesi = BLYonetmenler.BLYonetmenAra(aranan);
-
-        //    // Gelen listeyi UI'da göstermek için kontrol ekliyoruz
-        //    foreach (var yonetmen in yonetmenListesi)
-        //    {
-        //        yListeAraci arac = new yListeAraci();
-        //        arac.lblAdi.Text = yonetmen.AdSoyad;  // Yönetmenin adı
-        //        fYonPanel.Controls.Add(arac);  // Panel'e ekleme
-        //    }
-        //}
 
         #region  FILM OZELLIKLERI
         private void lblTurkce_Click(object sender, EventArgs e)
@@ -511,7 +416,7 @@ namespace Filmkoliks.comV1
         {
             vizyonTarihiHesapla();
         }
-        string vTarih = "";
+
         void vizyonTarihiHesapla()
         {
             vTarih = nGun.Value + "-" + nAy.Value + "-" + nYil.Value;
@@ -540,70 +445,29 @@ namespace Filmkoliks.comV1
                 MessageBox.Show(txtFilmAdi.Text.ToUpper() + " " + tSpan.TotalDays.ToString() + " GÜN SONRA VİZYONA GİRECEKTİR :)");
 
             }
-
-
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             lblTarih.Text = DateTime.Now.ToShortDateString();
         }
-        string yonetmen = "";
-        string oyuncu = "";
 
-        void secilenYonetmen()
-
+        private void secilenYonetmen()
         {
             yonetmen = "";
-            string sorgu = "select * from Tbl_Secilenler WHERE TUR='YÖNETMEN'";
-            baglanti.Open();
-            SqlCommand komut = new SqlCommand(sorgu, baglanti);
-            SqlDataReader oku = komut.ExecuteReader();
-            while (oku.Read())
-            {
-                yonetmen += " , " + oku["KISI"].ToString();
-            }
-            baglanti.Close();
+            // BL katmanından seçilen yönetmenleri al ve yonetmen değişkenine ata
+            yonetmen = BLSecilenler.SecilenYonetmenleriAl();
         }
-        //private void secilenYonetmen()
-        //{
-        //    yonetmen = "";
-        //    // BL katmanından seçilen yönetmenleri alıyoruz
-        //    yonetmen = BLSecilenler.SecilenYonetmenleriAl();
 
-        //    // Alınan yönetmenleri kullanarak UI'da işlem yapabiliriz (örneğin, bir label'a yazdırmak)
-        //    //lblSecilenYonetmen.Text = yonetmen;
-        //}
-
-        void secilenOyuncu()
+        private void secilenOyuncu()
         {
             oyuncu = "";
-            string sorgu = "select * from Tbl_Secilenler WHERE TUR='OYUNCU'";
-            baglanti.Open();
-            SqlCommand komut = new SqlCommand(sorgu, baglanti);
-            SqlDataReader oku = komut.ExecuteReader();
-            while (oku.Read())
-            {
-                oyuncu += " , " + oku["KISI"].ToString();
-            }
-            baglanti.Close();
+            // BL katmanından seçilen oyuncuları alıyoruz
+            oyuncu = BLSecilenler.SecilenOyunculariAl();
         }
-        //private void secilenOyuncu()
-        //{
-        //    oyuncu = "";
-        //    // BL katmanından seçilen oyuncuları alıyoruz
-        //    oyuncu = BLSecilenler.SecilenOyunculariAl();
-
-        //    // Alınan oyuncuları UI'da gösterebiliriz (örneğin, bir label'a yazdırmak)
-        //    //lblSecilenOyuncu.Text = oyuncu;
-        //}
 
         void temizlemeMetodu()
         {
-            //this.Controls.Clear();
-            //this.InitializeComponent();
-
             // TextBox'ları ve Label'ları temizle
             txtFilmAdi.Clear();
             txtFilmDetay.Clear();
@@ -643,25 +507,13 @@ namespace Filmkoliks.comV1
             pBKorkuSiddet.Image = (System.Drawing.Image)(Properties.Resources._lock);
             pBOlumsuzIcerik.Image = (System.Drawing.Image)(Properties.Resources._lock);
 
-            //foreach (Control arac in grBOzellikler.Controls)
-            //{
-            //    if (arac is PictureBox pictureBox)
-            //    {
-            //        // Resmin yolunu kontrol et
-            //        if (pictureBox.ImageLocation != null && pictureBox.ImageLocation.EndsWith(@"unlocked.png"))
-            //        {
-            //            // Eğer resim "unlocked.png" ise, "locked.png" ile değiştir
-            //            pictureBox.Image = Image.FromFile(@"C:\Users\mnurk\Desktop\locked.png");
-            //        }
-            //    }
-            //}
-
             txtFilmAdi.Focus();
             verileriSil();
             yListesiGetir();
             oListesiGetir();
             bugununTarihi();
         }
+
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             secilenYonetmen();
@@ -670,102 +522,30 @@ namespace Filmkoliks.comV1
             tur();
             ozellik();
 
+            //UI'den girilen verileri Entity class'a atıyoruz
+            EntityFilmler yeniFilm = new EntityFilmler();
 
-            //insert into deyimini kullanarak verileri veritabanına kaydetme işlemi gerçekleştireceğiz.
-            //input kontrolü sağlayacağız.
+            yeniFilm.Adi = txtFilmAdi.Text.ToUpper();
+            yeniFilm.Turu = secilenTur.Length > 2 ? secilenTur.Substring(2) : secilenTur;
+            yeniFilm.Ozellikleri = secilenOzellik.Length > 2 ? secilenOzellik.Substring(2) : secilenOzellik;
+            yeniFilm.Yonetmen = yonetmen.Length > 2 ? yonetmen.Substring(2) : yonetmen;
+            yeniFilm.Oyuncu = oyuncu.Length > 2 ? oyuncu.Substring(2) : oyuncu;
+            yeniFilm.Detay = txtFilmDetay.Text.ToUpper();
+            yeniFilm.Puan = lblRating.Text;
+            yeniFilm.Afis = resimYolu;
+            yeniFilm.Tarih = vTarih;
 
-            if (txtFilmAdi.Text != "" && txtFilmDetay.Text != "" && yonetmen != "" && oyuncu != "" && resimYolu != "" && vTarih != "" && secilenOzellik != "" && secilenTur != "")
+            // BL katmanındaki film ekleme işlemini çağırıyoruz
+            string sonucMesaji = BLFilmler.FilmEkle(yeniFilm);
+
+            // Sonucu kullanıcıya gösteriyoruz
+            MessageBox.Show(sonucMesaji);
+
+            if (sonucMesaji == "Film başarıyla kaydedildi!")
             {
-                //alanlarımız DOLU ise
-                string sorgu = " insert into Tbl_Filmler (ADI, TURU, OZELLIKLERI, YONETMEN, OYUNCU, DETAY, PUAN, AFIS, TARIH) VALUES (@P1, @P2, @P3, @P4, @P5, @P6, @P7, @P8, @P9)";
-                baglanti.Open();
-                SqlCommand komut = new SqlCommand(sorgu, baglanti);
-                komut.Parameters.AddWithValue("@p1", txtFilmAdi.Text.ToUpper());
-                if (secilenTur.Length > 2)
-                {
-                    komut.Parameters.AddWithValue("@p2", secilenTur.Substring(2));
-                }
-                else
-                {
-                    komut.Parameters.AddWithValue("@p2", secilenTur);
-                }
-                if (secilenOzellik.Length > 2)
-                {
-                    komut.Parameters.AddWithValue("@p3", secilenOzellik.Substring(2));
-                }
-                else
-                {
-                    komut.Parameters.AddWithValue("@p3", secilenOzellik);
-                }
-                if (yonetmen.Length > 2)
-                {
-                    komut.Parameters.AddWithValue("@p4", yonetmen.Substring(2));
-                }
-                else
-                {
-                    komut.Parameters.AddWithValue("@p4", yonetmen);
-                }
-                if (oyuncu.Length > 2)
-                {
-                    komut.Parameters.AddWithValue("@p5", oyuncu.Substring(2));
-                }
-                else
-                {
-                    komut.Parameters.AddWithValue("@p5", oyuncu);
-                }
-
-
-                komut.Parameters.AddWithValue("@p6", txtFilmDetay.Text.ToUpper());
-                komut.Parameters.AddWithValue("@p7", lblRating.Text);
-                komut.Parameters.AddWithValue("@p8", resimYolu);
-                komut.Parameters.AddWithValue("@p9", vTarih);
-                komut.ExecuteNonQuery();
-                baglanti.Close();
-                MessageBox.Show("FİLM KAYDEDİLMİŞTİR");
-                temizlemeMetodu();
-
+                temizlemeMetodu();  // Formu temizleme metodu
             }
-            else
-            {
-                //alanlarımız boş ise
-                MessageBox.Show("LÜTFEN İLGİLİ ALANLARI DOLDURUNUZ!");
-            }
-
-            //GEÇİCİ ALANLARIMIZ -daha sonradan değiştireceğiz.
         }
-        //private void btnKaydet_Click(object sender, EventArgs e)
-        //{
-        //    secilenYonetmen();
-        //    secilenOyuncu();
-
-        //    tur();
-        //    ozellik();
-
-        //    //UI'den girilen verileri Entity class'a atıyoruz
-        //    EntityFilmler yeniFilm = new EntityFilmler();
-
-        //    yeniFilm.Adi = txtFilmAdi.Text.ToUpper();
-        //    yeniFilm.Turu = secilenTur.Length > 2 ? secilenTur.Substring(2) : secilenTur;
-        //    yeniFilm.Ozellikleri = secilenOzellik.Length > 2 ? secilenOzellik.Substring(2) : secilenOzellik;
-        //    yeniFilm.Yonetmen = yonetmen.Length > 2 ? yonetmen.Substring(2) : yonetmen;
-        //    yeniFilm.Oyuncu = oyuncu.Length > 2 ? oyuncu.Substring(2) : oyuncu;
-        //    yeniFilm.Detay = txtFilmDetay.Text.ToUpper();
-        //    yeniFilm.Puan = lblRating.Text;
-        //    yeniFilm.Afis = resimYolu;
-        //    yeniFilm.Tarih = vTarih;
-
-
-        //    // BL katmanındaki film ekleme işlemini çağırıyoruz
-        //    string sonucMesaji = BLFilmler.FilmEkle(yeniFilm);
-
-        //    // Sonucu kullanıcıya gösteriyoruz
-        //    MessageBox.Show(sonucMesaji);
-
-        //    if (sonucMesaji == "Film başarıyla kaydedildi!")
-        //    {
-        //        temizlemeMetodu();  // Formu temizleme metodu
-        //    }
-        //}
 
         string secilenTur = "";
         string secilenOzellik = "";
@@ -805,11 +585,6 @@ namespace Filmkoliks.comV1
                     }
                 }
             }
-        }
-
-        private void fYonPanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

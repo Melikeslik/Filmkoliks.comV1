@@ -70,11 +70,13 @@ namespace LogicLayer
             {
                 return "Lütfen tüm alanları doldurunuz!";
             }
+            else
+            {
+                // Eğer tüm alanlar doluysa veritabanına kaydetme işlemi başlatılıyor
+                int sonuc = DALFilmler.FilmEkle(film);
 
-            // Eğer tüm alanlar doluysa veritabanına kaydetme işlemi başlatılıyor
-            int sonuc = DALFilmler.FilmEkle(film);
-
-            return sonuc > 0 ? "Film başarıyla kaydedildi!" : "Film kaydedilirken bir hata oluştu!";
+                return sonuc > 0 ? "Film başarıyla kaydedildi!" : "Film kaydedilirken bir hata oluştu!";
+            }
         }
 
         // Filmler listesini döndüren metot

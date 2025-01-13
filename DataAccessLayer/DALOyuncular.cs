@@ -1,6 +1,7 @@
 ﻿using EntityLayer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -8,185 +9,120 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class DALOyuncular
+    public class DALOyuncular: Baglanti
     {
         public static List<EntityOyuncular> OyuncuListesiGetir()
         {
             List<EntityOyuncular> oyuncuListesi = new List<EntityOyuncular>();
-            string sorgu = "SELECT * FROM Tbl_Oyuncular ORDER BY ADSOYAD ASC";
+            SqlCommand komut = new SqlCommand("SELECT * FROM Tbl_Oyuncular ORDER BY ADSOYAD ASC", baglanti);
 
-            using (SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti))
+            if (baglanti.State == System.Data.ConnectionState.Closed)
             {
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                SqlDataReader oku = komut.ExecuteReader();
-                while (oku.Read())
-                {
-                    EntityOyuncular oyuncu = new EntityOyuncular
-                    {
-                        Id = Convert.ToInt16(oku["ID"]),
-                        AdSoyad = oku["ADSOYAD"].ToString(),
-                        Cinsiyet = oku["CINSIYET"].ToString(),
-                        Yas = oku["YAS"].ToString(),
-                        Biyografi = oku["BIYOGRAFI"].ToString(),
-                        Resim = oku["RESIM"].ToString()
-                    };
-                    oyuncuListesi.Add(oyuncu);
-                }
-                oku.Close();
+                baglanti.Open();
             }
 
+            SqlDataReader oku = komut.ExecuteReader();
+            while (oku.Read())
+            {
+                EntityOyuncular oyuncu = new EntityOyuncular
+                {
+                    Id = Convert.ToInt16(oku["ID"]),
+                    AdSoyad = oku["ADSOYAD"].ToString(),
+                    Cinsiyet = oku["CINSIYET"].ToString(),
+                    Yas = oku["YAS"].ToString(),
+                    Biyografi = oku["BIYOGRAFI"].ToString(),
+                    Resim = oku["RESIM"].ToString()
+                };
+                oyuncuListesi.Add(oyuncu);
+            }
+            baglanti.Close();
             return oyuncuListesi;
         }
 
-        public static List<EntityOyuncular> OyuncuAra(string aranan)
+        public static List<EntityOyuncular> OyuncuAra(string aramaMetni)
         {
-            List<EntityOyuncular> oyuncuListesi = new List<EntityOyuncular>();
-            string sorgu = "SELECT * FROM Tbl_Oyuncular WHERE ADSOYAD LIKE @aranan ORDER BY ADSOYAD ASC";
+            List<EntityOyuncular> oyuncular = new List<EntityOyuncular>();
+            SqlCommand komut = new SqlCommand("select * from Tbl_Oyuncular Where ADSOYAD LIKE @p1 collate Turkish_CI_AS ORDER BY ADSOYAD ASC", baglanti);
+            komut.Parameters.AddWithValue("@p1", "%" + aramaMetni + "%");
 
-            using (SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti))
+            if (baglanti.State == System.Data.ConnectionState.Closed)
             {
-                komut.Parameters.AddWithValue("@aranan", "%" + aranan + "%");
-
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                SqlDataReader oku = komut.ExecuteReader();
-                while (oku.Read())
-                {
-                    EntityOyuncular oyuncu = new EntityOyuncular
-                    {
-                        Id = Convert.ToInt16(oku["ID"]),
-                        AdSoyad = oku["ADSOYAD"].ToString(),
-                        Cinsiyet = oku["CINSIYET"].ToString(),
-                        Yas = oku["YAS"].ToString(),
-                        Biyografi = oku["BIYOGRAFI"].ToString(),
-                        Resim = oku["RESIM"].ToString()
-                    };
-                    oyuncuListesi.Add(oyuncu);
-                }
-                oku.Close();
+                baglanti.Open();
             }
 
-            return oyuncuListesi;
+            SqlDataReader oku = komut.ExecuteReader();
+            while (oku.Read())
+            {
+                EntityOyuncular oyuncu = new EntityOyuncular
+                {
+                    Id = Convert.ToInt16(oku["ID"]),
+                    AdSoyad = oku["ADSOYAD"].ToString(),
+                    Resim = oku["RESIM"].ToString()
+                };
+                oyuncular.Add(oyuncu);
+            }
+            baglanti.Close();
+            return oyuncular;
         }
 
-        // Oyuncu bilgilerini çekme
-        public static EntityOyuncular OyuncuGetir(short id)
+        public static List<EntityOyuncular> GetOyuncuById(short id)
         {
-            EntityOyuncular oyuncu = null;
-            string sorgu = "SELECT * FROM Tbl_Oyuncular WHERE ID=@id";
+            List<EntityOyuncular> oyuncular = new List<EntityOyuncular>();
+            SqlCommand komut = new SqlCommand("select * from Tbl_Oyuncular WHERE ID=@P1", baglanti);
 
-            using (SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti))
+            if (baglanti.State == System.Data.ConnectionState.Closed)
             {
-                komut.Parameters.AddWithValue("@id", id);
-
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                SqlDataReader oku = komut.ExecuteReader();
-                if (oku.Read())
-                {
-                    oyuncu = new EntityOyuncular
-                    {
-                        Id = Convert.ToInt16(oku["ID"]),
-                        AdSoyad = oku["ADSOYAD"].ToString(),
-                        Cinsiyet = oku["CINSIYET"].ToString(),
-                        Yas = oku["YAS"].ToString(),
-                        Biyografi = oku["BIYOGRAFI"].ToString(),
-                        Resim = oku["RESIM"].ToString()
-                    };
-                }
+                baglanti.Open();
             }
 
-            return oyuncu;
-        }
+            komut.Parameters.AddWithValue("@p1", id);
 
-        // Oyuncu silme işlemi
-        public static bool OyuncuSil(short id)
-        {
-            string sorgu = "DELETE FROM Tbl_Oyuncular WHERE ID = @id";
-            bool result = false;
-
-            using (SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti))
+            // Veriyi okuma işlemi
+            SqlDataReader oku = komut.ExecuteReader();
+            while (oku.Read())
             {
-                komut.Parameters.AddWithValue("@id", id);
-
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                int rowsAffected = komut.ExecuteNonQuery();
-                if (rowsAffected > 0)
-                {
-                    result = true; // Silme başarılı
-                }
+                EntityOyuncular oyuncu = new EntityOyuncular();
+                oyuncu.Cinsiyet = oku["CINSIYET"].ToString();
+                oyuncu.Biyografi = oku["BIYOGRAFI"].ToString();
+                oyuncu.AdSoyad = oku["ADSOYAD"].ToString();
+                oyuncular.Add(oyuncu);
             }
+            oku.Close();
 
-            return result;
+            // Baglantıyı kapatıyoruz
+            baglanti.Close();
+            return oyuncular;
         }
 
-        // Oyuncunun biyografisini ve adını getiren metot
-        public static EntityOyuncular GetOyuncuById(short id)
+        public static bool OyuncuSil(short o)
         {
-            string sorgu = "SELECT * FROM Tbl_Oyuncular WHERE ID = @id";
-            EntityOyuncular oyuncu = null;
-
-            using (SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti))
+            SqlCommand komut = new SqlCommand("delete from Tbl_Oyuncular Where ID= @p1", baglanti);
+            if (komut.Connection.State != ConnectionState.Open)
             {
-                komut.Parameters.AddWithValue("@id", id);
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                SqlDataReader oku = komut.ExecuteReader();
-                if (oku.Read())
-                {
-                    oyuncu = new EntityOyuncular
-                    {
-                        Id = id,
-                        AdSoyad = oku["ADSOYAD"].ToString(),
-                        Biyografi = oku["BIYOGRAFI"].ToString()
-                    };
-                }
+                komut.Connection.Open();
             }
-
-            return oyuncu;
+            komut.Parameters.AddWithValue("@P1", o);
+            return komut.ExecuteNonQuery() > 0;
         }
+
 
         // Oyuncu eklemek için metot
-        public static void AddOyuncu(EntityOyuncular oyuncu)
+        public static int AddOyuncu(EntityOyuncular oyuncu)
         {
-            string sorgu = "INSERT INTO Tbl_Oyuncular (ADSOYAD, CINSIYET, YAS, BIYOGRAFI, RESIM) VALUES (@p1, @p2, @p3, @p4, @p5)";
-
-            // SQL komutunu oluştur
-            using (SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti))
+            SqlCommand komut = new SqlCommand("INSERT INTO Tbl_Oyuncular (ADSOYAD, CINSIYET, YAS, BIYOGRAFI, RESIM) VALUES (@p1, @p2, @p3, @p4, @p5)", baglanti);
+            if (komut.Connection.State != ConnectionState.Open)
             {
-                // Parametreleri ekle
-                komut.Parameters.AddWithValue("@p1", oyuncu.AdSoyad);
-                komut.Parameters.AddWithValue("@p2", oyuncu.Cinsiyet);
-                komut.Parameters.AddWithValue("@p3", oyuncu.Yas);
-                komut.Parameters.AddWithValue("@p4", oyuncu.Biyografi);
-                komut.Parameters.AddWithValue("@p5", oyuncu.Resim);
-
-                // Bağlantıyı aç
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                // Sorguyu çalıştır
-                komut.ExecuteNonQuery();
+                komut.Connection.Open();
             }
+            // Parametreleri ekle
+            komut.Parameters.AddWithValue("@p1", oyuncu.AdSoyad);
+            komut.Parameters.AddWithValue("@p2", oyuncu.Cinsiyet);
+            komut.Parameters.AddWithValue("@p3", oyuncu.Yas);
+            komut.Parameters.AddWithValue("@p4", oyuncu.Biyografi);
+            komut.Parameters.AddWithValue("@p5", oyuncu.Resim);
+
+            // Sorguyu çalıştır
+            return komut.ExecuteNonQuery();
         }
     }
 }

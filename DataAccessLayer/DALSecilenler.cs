@@ -24,33 +24,30 @@ namespace DataAccessLayer
                 }
 
                 komut.ExecuteNonQuery();
+
+                komut.Connection.Close();
             }
         }
 
         public static List<EntitySecilenler> SecilenYonetmenleriGetir()
         {
             List<EntitySecilenler> secilenlerListesi = new List<EntitySecilenler>();
-            string sorgu = "SELECT * FROM Tbl_Secilenler WHERE TUR = 'YÖNETMEN'";
+            SqlCommand komut = new SqlCommand("SELECT * FROM Tbl_Secilenler WHERE TUR = 'YONETMEN'", baglanti);
 
-            using (SqlCommand komut = new SqlCommand(sorgu, baglanti))
+            if (baglanti.State == System.Data.ConnectionState.Closed)
             {
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                SqlDataReader oku = komut.ExecuteReader();
-                while (oku.Read())
-                {
-                    EntitySecilenler secilen = new EntitySecilenler
-                    {
-                        Kisi = oku["KISI"].ToString(),
-                        Tur = oku["TUR"].ToString()
-                    };
-                    secilenlerListesi.Add(secilen);
-                }
-                oku.Close();
+                baglanti.Open();
             }
+
+            SqlDataReader oku = komut.ExecuteReader();
+            while (oku.Read())
+            {
+                EntitySecilenler secilen = new EntitySecilenler();
+                secilen.Kisi = oku["KISI"].ToString();
+                secilen.Tur = "YONETMEN";
+                secilenlerListesi.Add(secilen);
+            }
+            oku.Close();
 
             return secilenlerListesi;
         }
@@ -59,55 +56,48 @@ namespace DataAccessLayer
         public static List<EntitySecilenler> SecilenOyunculariGetir()
         {
             List<EntitySecilenler> secilenlerListesi = new List<EntitySecilenler>();
-            string sorgu = "SELECT * FROM Tbl_Secilenler WHERE TUR = 'OYUNCU'";
+            SqlCommand komut = new SqlCommand("SELECT * FROM Tbl_Secilenler WHERE TUR = 'OYUNCU'", baglanti);
 
-            using (SqlCommand komut = new SqlCommand(sorgu, baglanti))
+            if (baglanti.State == System.Data.ConnectionState.Closed)
             {
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                SqlDataReader oku = komut.ExecuteReader();
-                while (oku.Read())
-                {
-                    EntitySecilenler secilen = new EntitySecilenler
-                    {
-                        Kisi = oku["KISI"].ToString(),
-                        Tur = oku["TUR"].ToString()
-                    };
-                    secilenlerListesi.Add(secilen);
-                }
-                oku.Close();
+                baglanti.Open();
             }
+
+            SqlDataReader oku = komut.ExecuteReader();
+            while (oku.Read())
+            {
+                EntitySecilenler secilen = new EntitySecilenler();
+                secilen.Kisi = oku["KISI"].ToString();
+                secilen.Tur = "OYUNCU";
+                secilenlerListesi.Add(secilen);
+            }
+            oku.Close();
 
             return secilenlerListesi;
         }
 
-        // Belirtilen KISI ve TUR'ye göre bir kayıt var mı diye kontrol eden metod
+        // Belirtilen KISI ve TUR'e göre bir kayıt var mı diye kontrol eden metod
         public static bool SecilenOyuncuVarMi(string kisi)
         {
             string sorgu = "SELECT * FROM Tbl_Secilenler WHERE KISI = @kisi AND TUR = @tur";
             bool sonuc = false;
 
-            using (SqlConnection conn = new SqlConnection(Baglanti.baglanti.ConnectionString))
+            SqlCommand komut = new SqlCommand(sorgu, baglanti);
+            if (komut.Connection.State != System.Data.ConnectionState.Open)
             {
-                conn.Open(); // Bağlantıyı aç
-
-                using (SqlCommand komut = new SqlCommand(sorgu, conn))
-                {
-                    komut.Parameters.AddWithValue("@kisi", kisi);
-                    komut.Parameters.AddWithValue("@tur", "OYUNCU");
-
-                    using (SqlDataReader oku = komut.ExecuteReader())
-                    {
-                        if (oku.Read())
-                        {
-                            sonuc = true; // Eğer kayıt varsa true dön
-                        }
-                    }
-                }
+                komut.Connection.Open();
             }
+
+            komut.Parameters.AddWithValue("@kisi", kisi);
+            komut.Parameters.AddWithValue("@tur", "OYUNCU");
+
+            SqlDataReader oku = komut.ExecuteReader();
+            if (oku.Read())
+            {
+                sonuc = true; // Eğer kayıt varsa true dön
+            }
+            oku.Close();
+            komut.Connection.Close();
 
             return sonuc;
         }
@@ -117,24 +107,21 @@ namespace DataAccessLayer
             string sorgu = "SELECT * FROM Tbl_Secilenler WHERE KISI = @kisi AND TUR = @tur";
             bool sonuc = false;
 
-            using (SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti))
+            SqlCommand komut = new SqlCommand(sorgu, baglanti);
+            if (komut.Connection.State != System.Data.ConnectionState.Open)
             {
-
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-                komut.Parameters.AddWithValue("@kisi", kisi);
-                komut.Parameters.AddWithValue("@tur", "YONETMEN");
-
-                SqlDataReader oku = komut.ExecuteReader();
-                if (oku.Read())
-                {
-                    sonuc = true;
-                }
-                oku.Close();
+                komut.Connection.Open();
             }
+            komut.Parameters.AddWithValue("@kisi", kisi);
+            komut.Parameters.AddWithValue("@tur", "YONETMEN");
 
+            SqlDataReader oku = komut.ExecuteReader();
+            if (oku.Read())
+            {
+                sonuc = true;
+            }
+            oku.Close();
+            komut.Connection.Close();
             return sonuc;
         }
 
@@ -152,9 +139,11 @@ namespace DataAccessLayer
 
                 komut.Parameters.AddWithValue("@kisi", kisi);
                 komut.Parameters.AddWithValue("@tur", "OYUNCU");
-               
+
 
                 komut.ExecuteNonQuery();
+
+                komut.Connection.Close();
             }
         }
         public static void SecilenYonetmenEkle(string kisi)
@@ -171,6 +160,8 @@ namespace DataAccessLayer
                 komut.Parameters.AddWithValue("@tur", "YONETMEN");
 
                 komut.ExecuteNonQuery();
+
+                komut.Connection.Close();
             }
         }
 
@@ -189,6 +180,8 @@ namespace DataAccessLayer
                 komut.Parameters.AddWithValue("@tur", "OYUNCU");
 
                 komut.ExecuteNonQuery();
+
+                komut.Connection.Close();
             }
         }
 
@@ -206,6 +199,8 @@ namespace DataAccessLayer
                 komut.Parameters.AddWithValue("@tur", "YONETMEN");
 
                 komut.ExecuteNonQuery();
+
+                komut.Connection.Close();
             }
         }
     }

@@ -21,5 +21,22 @@ namespace LogicLayer
                 return null; // Geçersiz salon adı
             }
         }
+
+        public static List<EntitySalonlar> BLSalonAdiGetir()
+        {
+            return DALSalonlar.SalonAdiGetir();
+        }
+
+        public static void SalonKaydet(EntitySalonlar entitySalon)
+        {
+            if (!string.IsNullOrEmpty(entitySalon.SalonAdi) && !string.IsNullOrEmpty(entitySalon.KoltukSayisi))
+            {
+                DALSalonlar.SalonKaydet(entitySalon);
+            }
+            else
+            {
+                throw new Exception("Salon adı veya koltuk sayısı boş olamaz.");
+            }
+        }
     }
 }

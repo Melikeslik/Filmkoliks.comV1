@@ -10,34 +10,44 @@ namespace LogicLayer
 {
     public class BLYonetmenler
     {
-        public static List<EntityYonetmenler> BLYonetmenListesiGetir()
+        public static List<EntityYonetmenler> BLYonetmenListele()
         {
-            // DAL katmanından yönetmen listesini alıyoruz
-            return DALYonetmenler.YonetmenListesiGetir();
+            return DALYonetmenler.YonetmenListesi();
         }
 
-        public static List<EntityYonetmenler> BLYonetmenAra(string aranan)
+        public static List<EntityYonetmenler> BLYonetmenAra(string aramaMetni)
         {
-            // DAL katmanından yönetmen arama sonuçlarını alıyoruz
-            return DALYonetmenler.YonetmenAra(aranan);
+            if (string.IsNullOrEmpty(aramaMetni))
+            {
+                return DALYonetmenler.YonetmenListesi();
+            }
+            else
+            {
+                return DALYonetmenler.YonetmenAra(aramaMetni);
+            }
         }
 
-        // Yönetmen bilgilerini alıyoruz
-        public static EntityYonetmenler YonetmenGetir(short id)
+        public static List<EntityYonetmenler> BLYonetmenListeleById(short id)
         {
-            return DALYonetmenler.YonetmenGetir(id);
+            return DALYonetmenler.YonetmenListesiById(id);
         }
 
-        // Yönetmen silme işlemi
-        public static bool YonetmenSil(short id)
+        public static bool BLYonetmenSil(short yon)
         {
-            return DALYonetmenler.YonetmenSil(id);
+            if (yon >= 1)
+            {
+                return DALYonetmenler.YonetmenSil(yon);
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        // Yonetmen bilgilerini getiren metot
-        public static EntityYonetmenler GetYonetmenById(short id)
+        public static int BLAddYonetmen(EntityYonetmenler yonetmen)
         {
-            return DALYonetmenler.GetYonetmenById(id);
+            // DAL metodunu çağır
+            return DALYonetmenler.AddYonetmen(yonetmen);
         }
     }
 }

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using DataAccessLayer;
+using EntityLayer;
+using LogicLayer;
 
 namespace Filmkoliks.comV1
 {
@@ -23,42 +25,33 @@ namespace Filmkoliks.comV1
         {
             this.Close();
         }
-
+        
         private void FrmYonetmenListesi_Load(object sender, EventArgs e)
         {
-            Baglanti.baglanti.Close();
-            Baglanti.baglanti.Open();
             ListePaneli.Controls.Clear();
-            string sorgu = "select * from Tbl_Yonetmenler ORDER BY ADSOYAD ASC";
-            
-            SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti);
-            SqlDataReader oku = komut.ExecuteReader();
-            while (oku.Read())
+            List<EntityYonetmenler> yonetmenler = BLYonetmenler.BLYonetmenListele();
+            foreach (var yonetmen in yonetmenler)
             {
                 YonetmenListesi arac = new YonetmenListesi();
-                arac.lblId.Text = oku["ID"].ToString();
-                arac.lblAdSoyad.Text = oku["ADSOYAD"].ToString();
-                arac.pBResimDetay.ImageLocation = oku["RESIM"].ToString();
+                arac.lblId.Text = yonetmen.Id.ToString();
+                arac.lblAdSoyad.Text = yonetmen.AdSoyad;
+                arac.pBResimDetay.ImageLocation = yonetmen.Resim;
                 ListePaneli.Controls.Add(arac);
             }
-            Baglanti.baglanti.Close();
         }
 
         private void txtAramaYap_TextChanged(object sender, EventArgs e)
         {
             ListePaneli.Controls.Clear();
-            Baglanti.baglanti.Open();
-            SqlCommand ara = new SqlCommand("select * from Tbl_Yonetmenler Where ADSOYAD LIKE '%"+ txtAramaYap.Text +"%' collate Turkish_CI_AS ORDER BY ADSOYAD ASC", Baglanti.baglanti);
-            SqlDataReader oku = ara.ExecuteReader();
-            while (oku.Read())
+            List<EntityYonetmenler> yonetmenler = BLYonetmenler.BLYonetmenAra(txtAramaYap.Text);
+            foreach (var yonetmen in yonetmenler)
             {
                 YonetmenListesi arac = new YonetmenListesi();
-                arac.lblId.Text = oku["ID"].ToString();
-                arac.lblAdSoyad.Text = oku["ADSOYAD"].ToString();
-                arac.pBResimDetay.ImageLocation = oku["RESIM"].ToString();
+                arac.lblId.Text = yonetmen.Id.ToString();
+                arac.lblAdSoyad.Text = yonetmen.AdSoyad;
+                arac.pBResimDetay.ImageLocation = yonetmen.Resim;
                 ListePaneli.Controls.Add(arac);
             }
-            Baglanti.baglanti.Close();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using EntityLayer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -8,156 +9,120 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class DALYonetmenler
+    public class DALYonetmenler: Baglanti
     {
-        public static List<EntityYonetmenler> YonetmenListesiGetir()
+
+        public static List<EntityYonetmenler> YonetmenListesi()
         {
-            List<EntityYonetmenler> yonetmenListesi = new List<EntityYonetmenler>();
-            string sorgu = "SELECT * FROM Tbl_Yonetmenler ORDER BY ADSOYAD ASC";
+            List<EntityYonetmenler> yonetmenler = new List<EntityYonetmenler>();
+            SqlCommand komut = new SqlCommand("select * from Tbl_Yonetmenler ORDER BY ADSOYAD ASC", baglanti);
 
-            using (SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti))
+            if (baglanti.State == System.Data.ConnectionState.Closed)
             {
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                SqlDataReader oku = komut.ExecuteReader();
-                while (oku.Read())
-                {
-                    EntityYonetmenler yonetmen = new EntityYonetmenler
-                    {
-                        Id = Convert.ToInt16(oku["ID"]),
-                        AdSoyad = oku["ADSOYAD"].ToString(),
-                        Cinsiyet = oku["CINSIYET"].ToString(),
-                        Biyografi = oku["BIYOGRAFI"].ToString(),
-                        Resim = oku["RESIM"].ToString()
-                    };
-                    yonetmenListesi.Add(yonetmen);
-                }
-                oku.Close();
+                baglanti.Open();
             }
 
-            return yonetmenListesi;
+            SqlDataReader oku = komut.ExecuteReader();
+            while (oku.Read())
+            {
+                EntityYonetmenler yonetmen = new EntityYonetmenler
+                {
+                    Id = Convert.ToInt16(oku["ID"]),
+                    AdSoyad = oku["ADSOYAD"].ToString(),
+                    Cinsiyet = oku["CINSIYET"].ToString(),
+                    Yas = oku["YAS"].ToString(),
+                    Biyografi = oku["BIYOGRAFI"].ToString(),
+                    Resim = oku["RESIM"].ToString()
+                };
+                yonetmenler.Add(yonetmen);
+            }
+            baglanti.Close();
+            return yonetmenler;
         }
 
-        public static List<EntityYonetmenler> YonetmenAra(string aranan)
+        public static List<EntityYonetmenler> YonetmenAra(string aramaMetni)
         {
-            List<EntityYonetmenler> yonetmenListesi = new List<EntityYonetmenler>();
-            string sorgu = "SELECT * FROM Tbl_Yonetmenler WHERE ADSOYAD LIKE @aranan COLLATE TURKISH_CI_AS ORDER BY ADSOYAD ASC";
+            List<EntityYonetmenler> yonetmenler = new List<EntityYonetmenler>();
+            SqlCommand komut = new SqlCommand("select * from Tbl_Yonetmenler Where ADSOYAD LIKE @p1 collate Turkish_CI_AS ORDER BY ADSOYAD ASC", baglanti);
+            komut.Parameters.AddWithValue("@p1", "%" + aramaMetni + "%");
 
-            using (SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti))
+            if (baglanti.State == ConnectionState.Closed)
             {
-                komut.Parameters.AddWithValue("@aranan", "%" + aranan + "%");
-
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                SqlDataReader oku = komut.ExecuteReader();
-                while (oku.Read())
-                {
-                    EntityYonetmenler yonetmen = new EntityYonetmenler
-                    {
-                        Id = Convert.ToInt16(oku["ID"]),
-                        AdSoyad = oku["ADSOYAD"].ToString(),
-                        Biyografi = oku["BIYOGRAFI"].ToString(),
-                        Resim = oku["RESIM"].ToString()
-                    };
-                    yonetmenListesi.Add(yonetmen);
-                }
-                oku.Close();
+                baglanti.Open();
             }
 
-            return yonetmenListesi;
+            SqlDataReader oku = komut.ExecuteReader();
+            while (oku.Read())
+            {
+                EntityYonetmenler yonetmen = new EntityYonetmenler
+                {
+                    Id = Convert.ToInt16(oku["ID"]),
+                    AdSoyad = oku["ADSOYAD"].ToString(),
+                    Resim = oku["RESIM"].ToString()
+                };
+                yonetmenler.Add(yonetmen);
+            }
+            baglanti.Close();
+            return yonetmenler;
         }
 
-        // Yonetmen bilgilerini çekme
-        public static EntityYonetmenler YonetmenGetir(short id)
+        //YonetmenListesi.cs için:
+        public static List<EntityYonetmenler> YonetmenListesiById(short id)
         {
-            EntityYonetmenler yonetmen = null;
-            string sorgu = "SELECT * FROM Tbl_Yonetmenler WHERE ID=@id";
+            List<EntityYonetmenler> yonetmenler = new List<EntityYonetmenler>();
+            SqlCommand komut = new SqlCommand("select * from Tbl_Yonetmenler WHERE ID=@P1", baglanti);
 
-            using (SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti))
+            if (baglanti.State == System.Data.ConnectionState.Closed)
             {
-                komut.Parameters.AddWithValue("@id", id);
-
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                SqlDataReader oku = komut.ExecuteReader();
-                if (oku.Read())
-                {
-                    yonetmen = new EntityYonetmenler
-                    {
-                        Id = Convert.ToInt16(oku["ID"]),
-                        AdSoyad = oku["ADSOYAD"].ToString(),
-                        Cinsiyet = oku["CINSIYET"].ToString(),
-                        Yas = oku["YAS"].ToString(),
-                        Biyografi = oku["BIYOGRAFI"].ToString(),
-                        Resim = oku["RESIM"].ToString()
-                    };
-                }
+                baglanti.Open();
             }
+            
+            komut.Parameters.AddWithValue("@p1", id);
 
-            return yonetmen;
+            // Veriyi okuma işlemi
+            SqlDataReader oku = komut.ExecuteReader();
+            while (oku.Read())
+            {
+                EntityYonetmenler yonetmen = new EntityYonetmenler();
+                yonetmen.Cinsiyet = oku["CINSIYET"].ToString();
+                yonetmen.Biyografi = oku["BIYOGRAFI"].ToString();
+                yonetmen.AdSoyad = oku["ADSOYAD"].ToString();
+                yonetmenler.Add(yonetmen);
+            }
+            oku.Close();
+
+            // Baglantıyı kapatıyoruz
+            baglanti.Close();
+            return yonetmenler;
         }
 
-        // Yonetmen silme işlemi
-        public static bool YonetmenSil(short id)
+        public static bool YonetmenSil(short y)
         {
-            string sorgu = "DELETE FROM Tbl_Yonetmenler WHERE ID = @id";
-            bool result = false;
-
-            using (SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti))
+            SqlCommand komut = new SqlCommand("delete from Tbl_Yonetmenler Where ID= @p1", baglanti);
+            if (komut.Connection.State != ConnectionState.Open)
             {
-                komut.Parameters.AddWithValue("@id", id);
-
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                int rowsAffected = komut.ExecuteNonQuery();
-                if (rowsAffected > 0)
-                {
-                    result = true; // Silme başarılı
-                }
+                komut.Connection.Open();
             }
-
-            return result;
+            komut.Parameters.AddWithValue("@P1", y);
+            return komut.ExecuteNonQuery() > 0;
         }
 
-        // Yonetmen biyografisini ve adını getiren metot
-        public static EntityYonetmenler GetYonetmenById(short id)
+        public static int AddYonetmen(EntityYonetmenler yonetmen)
         {
-            string sorgu = "SELECT * FROM Tbl_Yonetmenler WHERE ID = @id";
-            EntityYonetmenler yonetmen = null;
-
-            using (SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti))
+            SqlCommand komut = new SqlCommand("insert into Tbl_Yonetmenler (ADSOYAD, CINSIYET,YAS,BIYOGRAFI,RESIM) VALUES (@p1,@p2,@p3,@p4,@p5)", baglanti);
+            if (komut.Connection.State != ConnectionState.Open)
             {
-                komut.Parameters.AddWithValue("@id", id);
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                SqlDataReader oku = komut.ExecuteReader();
-                if (oku.Read())
-                {
-                    yonetmen = new EntityYonetmenler
-                    {
-                        Id = id,
-                        AdSoyad = oku["ADSOYAD"].ToString(),
-                        Biyografi = oku["BIYOGRAFI"].ToString()
-                    };
-                }
+                komut.Connection.Open();
             }
+            // Parametreleri ekle
+            komut.Parameters.AddWithValue("@p1", yonetmen.AdSoyad);
+            komut.Parameters.AddWithValue("@p2", yonetmen.Cinsiyet);
+            komut.Parameters.AddWithValue("@p3", yonetmen.Yas);
+            komut.Parameters.AddWithValue("@p4", yonetmen.Biyografi);
+            komut.Parameters.AddWithValue("@p5", yonetmen.Resim);
 
-            return yonetmen;
+            // Sorguyu çalıştır
+            return komut.ExecuteNonQuery();
         }
     }
 }

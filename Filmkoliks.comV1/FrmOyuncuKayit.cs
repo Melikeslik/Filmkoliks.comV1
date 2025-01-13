@@ -1,4 +1,5 @@
-﻿using LogicLayer;
+﻿using EntityLayer;
+using LogicLayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -118,24 +119,19 @@ namespace Filmkoliks.comV1
             if (string.IsNullOrEmpty(mesaj))
             {
                 string adSoyad = txtAd.Text.ToString().ToUpper() + " " + txtSoyad.Text.ToString().ToUpper();
-                //ToUpper() komudumuz var olan karakterlerin tümünü büyük harfe çevirir.
-                //baglanti.Open();
-                //SqlCommand kayit = new SqlCommand("insert into Tbl_Oyuncular (ADSOYAD, CINSIYET,YAS,BIYOGRAFI,RESIM) VALUES (@p1,@p2,@p3,@p4,@p5)", baglanti);
-                //kayit.Parameters.AddWithValue("@p1", adSoyad);
-                //kayit.Parameters.AddWithValue("@p2", cinsiyet);
-                //kayit.Parameters.AddWithValue("@p3", bYas);
-                //kayit.Parameters.AddWithValue("@p4", txtBiyografi.Text.ToString().ToUpper());
-                //kayit.Parameters.AddWithValue("@p5", resimYolu);
-                //kayit.ExecuteNonQuery();
-                //baglanti.Close();
-
                 string biyografi = txtBiyografi.Text.ToString().ToUpper(); // Biyografi bilgisini alıyoruz
 
                 // İş mantığı katmanındaki metodu çağır
-                BLOyuncular.AddOyuncu(adSoyad, cinsiyet, bYas, biyografi, resimYolu);
+                EntityOyuncular ent = new EntityOyuncular();
+                ent.AdSoyad = adSoyad;
+                ent.Cinsiyet = cinsiyet;
+                ent.Yas = bYas;
+                ent.Biyografi = biyografi;
+                ent.Resim = resimYolu;
+                BLOyuncular.BLAddOyuncu(ent);
 
                 MessageBox.Show("OYUNCU KAYIT İŞLEMİ BAŞARILI BİR ŞEKİLDE GERÇEKLEŞTİRİLDİ.");
-                //ARAÇ TEMİZLEME KOMUTU YAZMAMIZ GEREKECEK.
+                //ARAÇ TEMİZLEME KOMUTU 
                 aracTemizle();
             }
             else

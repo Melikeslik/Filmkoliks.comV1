@@ -46,5 +46,15 @@ namespace LogicLayer
         {
             return DALKontrol.KoltukBilgisiGetir(filmAdi, tarih, saat, salonAdi);
         }
+
+        public static List<EntityKontrol> DoluSaatleriGetir(string tarih, string salonAdi)
+        {
+            return DALKontrol.DoluSaatleriGetir(tarih, salonAdi);
+        }
+
+        public static void BLSeansKaydet(EntityKontrol entityKontrol)
+        {
+            DALKontrol.SeansKaydet(entityKontrol);
+        }
     }
 }

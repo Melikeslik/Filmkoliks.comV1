@@ -95,7 +95,6 @@
             this.groupBox1.Size = new System.Drawing.Size(655, 111);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // btnResimYukle
             // 
@@ -147,7 +146,6 @@
             this.txtSalonAdi.Name = "txtSalonAdi";
             this.txtSalonAdi.Size = new System.Drawing.Size(208, 39);
             this.txtSalonAdi.TabIndex = 6;
-            this.txtSalonAdi.TextChanged += new System.EventHandler(this.txtAd_TextChanged);
             // 
             // label2
             // 
@@ -168,7 +166,6 @@
             this.groupBox2.Size = new System.Drawing.Size(655, 488);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // panelSalon
             // 

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Filmkoliks.comV1
 {
-    public partial class salonListesi : UserControl // Burada Inheritance (kalıtım) örneği var. salomListesi sınıfı UserControl sınıfından miras almış.
+    public partial class salonListesi : UserControl // Burada Inheritance (kalıtım) örneği var. salonListesi sınıfı UserControl sınıfından miras almış.
     {
         public salonListesi()
         {
@@ -18,14 +18,11 @@ namespace Filmkoliks.comV1
         }
         private void gel(object sender, MouseEventArgs e)
         {
-            
             this.BackColor = Color.Lavender;
-                
         }
 
         private void ayril(object sender, EventArgs e)
         {
-            
             this.BackColor = Color.WhiteSmoke;
         }
     }

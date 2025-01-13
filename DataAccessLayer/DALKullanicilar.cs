@@ -28,6 +28,7 @@ namespace DataAccessLayer
             bool result = oku.Read(); // Kullanıcı bilgileri eşleşiyor mu kontrol et
 
             sorgula.Connection.Close();
+            oku.Close();
             return result;
         }
     }

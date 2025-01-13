@@ -15,28 +15,27 @@ namespace DataAccessLayer
         public static List<EntityFilmler> FilmListesiGetir()
         {
             List<EntityFilmler> filmListesi = new List<EntityFilmler>();
+
             string sorgu = "SELECT ADI, TARIH FROM Tbl_Filmler ORDER BY ADI ASC";
-
-            using (SqlCommand komut = new SqlCommand(sorgu, baglanti))
+            SqlCommand komut = new SqlCommand(sorgu, baglanti);
+            if (komut.Connection.State != ConnectionState.Open)
             {
-                if (komut.Connection.State != ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                SqlDataReader oku = komut.ExecuteReader();
-                while (oku.Read())
-                {
-                    EntityFilmler film = new EntityFilmler
-                    {
-                        Adi = oku["ADI"].ToString(),
-                        // Tarihi DateTime olarak dönüştürüyoruz
-                        Tarih = Convert.ToDateTime(oku["TARIH"]).ToString()
-                    };
-                    filmListesi.Add(film);
-                }
-                oku.Close();
+                komut.Connection.Open();
             }
+
+            SqlDataReader oku = komut.ExecuteReader();
+            while (oku.Read())
+            {
+                EntityFilmler film = new EntityFilmler
+                {
+                    Adi = oku["ADI"].ToString(),
+                    // Tarihi DateTime olarak dönüştürüyoruz
+                    Tarih = Convert.ToDateTime(oku["TARIH"]).ToString()
+                };
+                filmListesi.Add(film);
+            }
+            oku.Close();
+            komut.Connection.Close();
 
             return filmListesi;
         }
@@ -64,6 +63,7 @@ namespace DataAccessLayer
             }
 
             oku.Close();
+            komut.Connection.Close();  
             return tarihListesi;
         }
 
@@ -82,6 +82,7 @@ namespace DataAccessLayer
             SqlDataReader oku = komut.ExecuteReader();
             bool sonuc = oku.Read();  // Eğer kayıt varsa true döner, yoksa false döner
             oku.Close();
+            komut.Connection.Close();
 
             return sonuc;
         }
@@ -120,63 +121,63 @@ namespace DataAccessLayer
                 }
 
                 oku.Close();
+                komut.Connection.Close();
             }
 
             return film;
         }
 
+        //insert into deyimini kullanarak verileri veritabanına kaydetme işlemi gerçekleştireceğiz.
+        //input kontrolü sağlayacağız.
         // Veritabanına film ekleyen metod
         public static int FilmEkle(EntityFilmler film)
         {
-            string sorgu = "INSERT INTO Tbl_Filmler (ADI, TURU, OZELLIKLERI, YONETMEN, OYUNCU, DETAY, PUAN, AFIS, TARIH) VALUES (@P1, @P2, @P3, @P4, @P5, @P6, @P7, @P8, @P9)";
-
-            using (SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti))
+            SqlCommand komut = new SqlCommand("INSERT INTO Tbl_Filmler (ADI, TURU, OZELLIKLERI, YONETMEN, OYUNCU, DETAY, PUAN, AFIS, TARIH) VALUES (@P1, @P2, @P3, @P4, @P5, @P6, @P7, @P8, @P9)", baglanti);
+            if (komut.Connection.State != System.Data.ConnectionState.Open)
             {
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                komut.Parameters.AddWithValue("@P1", film.Adi);
-                komut.Parameters.AddWithValue("@P2", film.Turu);
-                komut.Parameters.AddWithValue("@P3", film.Ozellikleri);
-                komut.Parameters.AddWithValue("@P4", film.Yonetmen);
-                komut.Parameters.AddWithValue("@P5", film.Oyuncu);
-                komut.Parameters.AddWithValue("@P6", film.Detay);
-                komut.Parameters.AddWithValue("@P7", film.Puan);
-                komut.Parameters.AddWithValue("@P8", film.Afis);
-                komut.Parameters.AddWithValue("@P9", film.Tarih);
-
-                int sonuc = komut.ExecuteNonQuery();
-                komut.Connection.Close();
-                return sonuc;  // Eklenen satır sayısını döndürüyoruz
+                komut.Connection.Open();
             }
+
+            komut.Parameters.AddWithValue("@P1", film.Adi);
+            komut.Parameters.AddWithValue("@P2", film.Turu);
+            komut.Parameters.AddWithValue("@P3", film.Ozellikleri);
+            komut.Parameters.AddWithValue("@P4", film.Yonetmen);
+            komut.Parameters.AddWithValue("@P5", film.Oyuncu);
+            komut.Parameters.AddWithValue("@P6", film.Detay);
+            komut.Parameters.AddWithValue("@P7", film.Puan);
+            komut.Parameters.AddWithValue("@P8", film.Afis);
+            komut.Parameters.AddWithValue("@P9", film.Tarih);
+
+            return komut.ExecuteNonQuery();  // Eklenen satır sayısını döndürüyoruz
         }
+
 
         // Filmler tablosundaki tüm verileri alacak metot
         public static List<EntityFilmler> GetAllFilmler()
         {
             List<EntityFilmler> filmlerListesi = new List<EntityFilmler>();
             string sorgu = "SELECT * FROM Tbl_Filmler ORDER BY ADI ASC";
-            using (SqlCommand komut = new SqlCommand(sorgu, Baglanti.baglanti))
+            SqlCommand komut = new SqlCommand(sorgu, baglanti);
+            if (komut.Connection.State != System.Data.ConnectionState.Open)
             {
-                if (komut.Connection.State != System.Data.ConnectionState.Open)
-                {
-                    komut.Connection.Open();
-                }
-
-                SqlDataReader oku = komut.ExecuteReader();
-                while (oku.Read())
-                {
-                    EntityFilmler film = new EntityFilmler
-                    {
-                        Id = Convert.ToInt16(oku["ID"]),
-                        Adi = oku["ADI"].ToString(),
-                        Afis = oku["AFIS"].ToString()
-                    };
-                    filmlerListesi.Add(film);
-                }
+                komut.Connection.Open();
             }
+
+            SqlDataReader oku = komut.ExecuteReader();
+            while (oku.Read())
+            {
+                EntityFilmler film = new EntityFilmler
+                {
+                    Id = Convert.ToInt16(oku["ID"]),
+                    Adi = oku["ADI"].ToString(),
+                    Afis = oku["AFIS"].ToString(),
+                    Tarih = oku["TARIH"].ToString()
+                };
+                filmlerListesi.Add(film);
+            }
+            oku.Close();
+            komut.Connection.Close();
+
             return filmlerListesi;
         }
 
@@ -212,6 +213,8 @@ namespace DataAccessLayer
                     // Listeye ekle
                     filmlerListesi.Add(film);
                 }
+                oku.Close();
+                komut.Connection.Close();
             }
             // Filmleri döndür
             return filmlerListesi;

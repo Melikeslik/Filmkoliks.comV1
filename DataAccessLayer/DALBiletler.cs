@@ -43,6 +43,7 @@ namespace DataAccessLayer
             }
 
             dr.Close();
+            komut1.Connection.Close();
             return bilet;
         }
 
@@ -63,6 +64,7 @@ namespace DataAccessLayer
             komutKayit.Parameters.AddWithValue("@p8", ekle.Salon);
             komutKayit.Parameters.AddWithValue("@p9", ekle.Tur);
             komutKayit.Parameters.AddWithValue("@p10", DateTime.Now.ToString());
+            komutKayit.Connection.Close();
             return komutKayit.ExecuteNonQuery();
         }
 
@@ -79,6 +81,7 @@ namespace DataAccessLayer
             komutGuncelle.Parameters.AddWithValue("@tarih", guncelle.Tarih);
             komutGuncelle.Parameters.AddWithValue("@saat", guncelle.Saat);
             komutGuncelle.Parameters.AddWithValue("@salonadi", guncelle.SalonAdi);
+            komutGuncelle.Connection.Close();
             return komutGuncelle.ExecuteNonQuery() > 0;
         }
 
@@ -114,6 +117,7 @@ namespace DataAccessLayer
                         Tur = oku["TUR"].ToString(),
                         IslemSaati = oku["ISLEMSAATI"].ToString()
                     };
+                    oku.Close();
                 }
             }
             finally

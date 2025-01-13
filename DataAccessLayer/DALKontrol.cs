@@ -14,9 +14,9 @@ namespace DataAccessLayer
         public static List<EntityKontrol> SaatleriGetir(string filmAdi, string tarih)
         {
             List<EntityKontrol> saatListesi = new List<EntityKontrol>();
-            SqlConnection baglanti = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=FilmkoliksDB;Integrated Security=True");
 
             string sorgu = "SELECT DISTINCT SAAT FROM Tbl_Kontrol WHERE FILMADI=@filmAdi AND TARIH=@tarih";
+           
             SqlCommand komut = new SqlCommand(sorgu, baglanti);
             komut.Parameters.AddWithValue("@filmAdi", filmAdi);
             komut.Parameters.AddWithValue("@tarih", tarih);
@@ -34,6 +34,7 @@ namespace DataAccessLayer
                     };
                     saatListesi.Add(kontrol);
                 }
+                oku.Close();
             }
             finally
             {
@@ -136,6 +137,52 @@ namespace DataAccessLayer
             }
 
             return koltukListesi;
+        }
+
+        public static List<EntityKontrol> DoluSaatleriGetir(string tarih, string salonAdi)
+        {
+            List<EntityKontrol> saatler = new List<EntityKontrol>();
+            string sorgu = "SELECT DISTINCT SAAT FROM Tbl_Kontrol WHERE TARIH = @tarih AND SALONADI = @salonadi";
+            SqlCommand komut = new SqlCommand(sorgu, baglanti);
+            komut.Parameters.AddWithValue("@tarih", tarih);
+            komut.Parameters.AddWithValue("@salonadi", salonAdi);
+
+            if (baglanti.State == System.Data.ConnectionState.Closed)
+            {
+                baglanti.Open();
+            }
+
+            SqlDataReader oku = komut.ExecuteReader();
+            while (oku.Read())
+            {
+                EntityKontrol kontrol = new EntityKontrol
+                {
+                    Tarih = tarih,
+                    SalonAdi = salonAdi,
+                    Saat = oku["SAAT"].ToString()
+                };
+                saatler.Add(kontrol);
+            }
+            oku.Close();
+
+            return saatler;
+        }
+
+        public static void SeansKaydet(EntityKontrol entityKontrol)
+        {
+            string sorgu = "insert into Tbl_Kontrol (FILMADI, TARIH, SAAT, SALONADI) Values (@filmadi, @tarih, @saat, @salonadi)";
+            SqlCommand komut = new SqlCommand(sorgu, baglanti);
+            if (komut.Connection.State != ConnectionState.Open)
+            {
+                komut.Connection.Open();
+            }
+
+            komut.Parameters.AddWithValue("@filmAdi", entityKontrol.FilmAdi);
+            komut.Parameters.AddWithValue("@tarih", entityKontrol.Tarih);
+            komut.Parameters.AddWithValue("@saat", entityKontrol.Saat);
+            komut.Parameters.AddWithValue("@salonAdi", entityKontrol.SalonAdi);
+
+            komut.ExecuteNonQuery();
         }
     }
 }

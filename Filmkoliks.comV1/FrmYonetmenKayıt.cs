@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 using System.Data.SqlClient;
 using DataAccessLayer;
+using EntityLayer;
+using LogicLayer;
+
 namespace Filmkoliks.comV1
 {
     public partial class FrmYonetmenKayıt : Form
@@ -27,7 +30,6 @@ namespace Filmkoliks.comV1
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
-
         }
 
         private void btnResimYukle_Click(object sender, EventArgs e)
@@ -87,15 +89,15 @@ namespace Filmkoliks.comV1
             {
                 string adSoyad = txtAd.Text.ToString().ToUpper() + " " + txtSoyad.Text.ToString().ToUpper();
                 //ToUpper() komudumuz var olan karakterlerin tümünü büyük harfe çevirir.
-                Baglanti.baglanti.Open();
-                SqlCommand kayit = new SqlCommand("insert into Tbl_Yonetmenler (ADSOYAD, CINSIYET,YAS,BIYOGRAFI,RESIM) VALUES (@p1,@p2,@p3,@p4,@p5)", Baglanti.baglanti);
-                kayit.Parameters.AddWithValue("@p1", adSoyad);
-                kayit.Parameters.AddWithValue("@p2", cinsiyet);
-                kayit.Parameters.AddWithValue("@p3", bYas);
-                kayit.Parameters.AddWithValue("@p4", txtBiyografi.Text.ToString().ToUpper());
-                kayit.Parameters.AddWithValue("@p5", resimYolu);
-                kayit.ExecuteNonQuery();
-                Baglanti.baglanti.Close();
+                
+                EntityYonetmenler ent = new EntityYonetmenler();
+                ent.AdSoyad = adSoyad;
+                ent.Cinsiyet = cinsiyet;
+                ent.Yas = bYas;
+                ent.Biyografi = txtBiyografi.Text.ToString().ToUpper();
+                ent.Resim = resimYolu;
+                BLYonetmenler.BLAddYonetmen(ent);
+
                 MessageBox.Show("YÖNETMEN KAYIT İŞLEMİ BAŞARILI BİR ŞEKİLDE GERÇEKLEŞTİRİLDİ.");
                 //ARAÇ TEMİZLEME KOMUTU YAZMAMIZ GEREKECEK.
                 aracTemizle();
@@ -104,8 +106,8 @@ namespace Filmkoliks.comV1
             {
                 MessageBox.Show(mesaj);
             }
-
         }
+
         void aracTemizle()
         {
             txtAd.Text = "";
@@ -122,6 +124,7 @@ namespace Filmkoliks.comV1
             pBResim.Image = (System.Drawing.Image)(Properties.Resources.noGorsel); 
             txtAd.Focus();
         }
+
        //YAS HESAPLARKEN 100'DEN KUCUK OLMA KONTROLU EKLENEBILIR CUNKU VERITABANINA 2 HANELI OLACAK SEKILDE KAYIT YAPILIYOR.
         void yasHesaplama()
         {

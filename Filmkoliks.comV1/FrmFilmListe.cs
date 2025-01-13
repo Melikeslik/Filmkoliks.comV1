@@ -20,31 +20,11 @@ namespace Filmkoliks.comV1
             InitializeComponent();
         }
 
-        //connectionstring
-        //SqlConnection baglanti = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=FilmkoliksDB;Integrated Security=True");
-
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        //private void FrmFilmListe_Load(object sender, EventArgs e)
-        //{
-        //    ListePaneli.Controls.Clear();
-        //    string sorgu = "SELECT * FROM Tbl_Filmler ORDER BY ADI ASC";
-        //    baglanti.Open();
-        //    SqlCommand komut = new SqlCommand(sorgu, baglanti);
-        //    SqlDataReader oku = komut.ExecuteReader();
-        //    while (oku.Read())
-        //    {
-        //        FilmListesi arac = new FilmListesi();
-        //        arac.lblFilmAdi.Text = oku["ADI"].ToString();
-        //        arac.pBResim.ImageLocation = oku["AFIS"].ToString();
-        //        arac.lblIdNo.Text = oku["ID"].ToString();
-        //        ListePaneli.Controls.Add(arac);
-        //    }
-        //    baglanti.Close();
-        //}
         private void FrmFilmListe_Load(object sender, EventArgs e)
         {
             // Film listesini iş mantığı üzerinden al
@@ -64,23 +44,6 @@ namespace Filmkoliks.comV1
             }
         }
 
-        //private void txtAramaYap_TextChanged(object sender, EventArgs e)
-        //{
-        //    ListePaneli.Controls.Clear();
-        //    baglanti.Open();
-        //    SqlCommand ara = new SqlCommand("select * from Tbl_Filmler Where ADI LIKE '%" + txtAramaYap.Text + "%' collate Turkish_CI_AS ORDER BY ADI ASC", baglanti);
-        //    SqlDataReader oku = ara.ExecuteReader();
-        //    while (oku.Read())
-        //    {
-        //        FilmListesi arac = new FilmListesi();
-        //        arac.lblFilmAdi.Text = oku["ADI"].ToString();
-        //        arac.pBResim.ImageLocation = oku["AFIS"].ToString();
-        //        arac.lblIdNo.Text = oku["ID"].ToString();
-        //        ListePaneli.Controls.Add(arac);
-        //    }
-        //    baglanti.Close();
-
-        //}
         private void txtAramaYap_TextChanged(object sender, EventArgs e)
         {
             // Arama metnini al

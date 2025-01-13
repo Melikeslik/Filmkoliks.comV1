@@ -119,7 +119,6 @@
             this.cbSalon.Name = "cbSalon";
             this.cbSalon.Size = new System.Drawing.Size(286, 31);
             this.cbSalon.TabIndex = 9;
-            this.cbSalon.SelectedIndexChanged += new System.EventHandler(this.cbSalon_SelectedIndexChanged);
             // 
             // lblSecilen
             // 
@@ -289,7 +288,6 @@
             this.cbFilmAdi.Name = "cbFilmAdi";
             this.cbFilmAdi.Size = new System.Drawing.Size(286, 31);
             this.cbFilmAdi.TabIndex = 9;
-            this.cbFilmAdi.SelectedIndexChanged += new System.EventHandler(this.cbFilmAdi_SelectedIndexChanged);
             // 
             // btnTemizle
             // 

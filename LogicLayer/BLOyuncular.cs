@@ -19,42 +19,32 @@ namespace LogicLayer
         public static List<EntityOyuncular> BLOyuncuAra(string aranan)
         {
             // DAL katmanından oyuncu arama sonuçlarını alıyoruz
-            return DALOyuncular.OyuncuAra(aranan);
-        }
-
-        // Oyuncu bilgilerini alıyoruz
-        public static EntityOyuncular OyuncuGetir(short id)
-        {
-            return DALOyuncular.OyuncuGetir(id);
+            if (string.IsNullOrEmpty(aranan))
+            {
+                return DALOyuncular.OyuncuListesiGetir();
+            }
+            else
+            {
+                return DALOyuncular.OyuncuAra(aranan);
+            }
         }
 
         // Oyuncu silme işlemi
-        public static bool OyuncuSil(short id)
+        public static bool BLOyuncuSil(short id)
         {
             return DALOyuncular.OyuncuSil(id);
         }
 
-        // Oyuncu bilgilerini getiren metot
-        public static EntityOyuncular GetOyuncuById(short id)
+        public static List<EntityOyuncular> BLGetOyuncuById(short id)
         {
             return DALOyuncular.GetOyuncuById(id);
         }
 
-        // Oyuncu eklemek için metot
-        public static void AddOyuncu(string adSoyad, string cinsiyet, string yas, string biyografi, string resimYolu)
+        //Oyuncu eklemek için metot
+        public static int BLAddOyuncu(EntityOyuncular oyuncu)
         {
-            // Entity'yi oluştur
-            EntityOyuncular oyuncu = new EntityOyuncular
-            {
-                AdSoyad = adSoyad,
-                Cinsiyet = cinsiyet,
-                Yas = yas,
-                Biyografi = biyografi,
-                Resim = resimYolu
-            };
-
             // DAL metodunu çağır
-            DALOyuncular.AddOyuncu(oyuncu);
+            return DALOyuncular.AddOyuncu(oyuncu);
         }
     }
 }

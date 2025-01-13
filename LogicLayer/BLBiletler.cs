@@ -10,12 +10,6 @@ namespace LogicLayer
 {
     public class BLBiletler
     {
-        //public static List<EntityBiletler> BLBiletListesi()
-        //{
-        //    return DALBiletler.BiletListesi();
-
-        //}
-
         public static EntityBiletler BLBiletGetir(string biletNo)
         {
             if (!string.IsNullOrEmpty(biletNo))
@@ -39,7 +33,6 @@ namespace LogicLayer
         {
             return true;
         }
-
 
         public static EntityBiletler BiletSorgula(string biletKod)
         {
